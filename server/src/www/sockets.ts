@@ -1,5 +1,5 @@
 import { Server } from 'http'
-import { PollType } from '../../../shared/types/Poll'
+import { PollType } from '../types/Poll'
 import { setupPolling, onPollResult } from '../www/poll'
 import socket from 'socket.io'
 

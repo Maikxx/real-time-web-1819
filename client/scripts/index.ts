@@ -1,5 +1,5 @@
 import io from 'socket.io-client'
-import { ShortCryptoPrice } from '../../shared/types/CryptoCompare'
+import { ShortCryptoPrice } from './types/CryptoCompare'
 
 const socket = io()
 

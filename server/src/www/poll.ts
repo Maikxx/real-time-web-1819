@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 import Poll from 'async-polling'
-import { ShortCryptoPrice } from '../../../shared/types/CryptoCompare'
+import { ShortCryptoPrice } from '../types/CryptoCompare'
 import socket from 'socket.io'
 import _ from 'lodash'
 
