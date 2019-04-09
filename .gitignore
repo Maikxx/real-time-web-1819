@@ -3,7 +3,7 @@ node_modules/
 dist/
 .cache/
 .env
-./server/public/scripts/index.js
+**/*.js
 
 # Misc
 .DS_Store
