@@ -1,0 +1,52 @@
+{
+    "name": "week1",
+    "version": "1.0.0",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "build": "tsc && yarn prebuild-client && yarn copy-static-assets",
+        "moveClientJS": "gulp moveJavaScript",
+        "copy-static-assets": "yarn copy-views-directory && yarn copy-database",
+        "copy-views-directory": "copyfiles -E -u 2 \"./server/src/views/**/*\" \"./server/dist\"",
+        "copy-database": "copyfiles -E -u 2 \"./server/src/data/**/*\" \"./server/dist\"",
+        "minify-css": "gulp minifyCss",
+        "open-chrome": "wait-on http://localhost:3000 && open -a \"Google Chrome\" http://localhost:3000",
+        "prebuild-client": "yarn minify-css && yarn moveClientJS",
+        "start-server": "yarn prebuild-client && concurrently \"gulp watchClient\" \"yarn watch-server\" \"yarn open-chrome\" --raw",
+        "start": "node server/dist/index.js",
+        "watch-server": "ts-node-dev --respawn --transpileOnly ./server/src/index.ts"
+    },
+    "devDependencies": {
+        "@types/body-parser": "^1.17.0",
+        "@types/compression": "^0.0.36",
+        "@types/dotenv": "^6.1.0",
+        "@types/ejs": "^2.6.3",
+        "@types/express": "^4.16.1",
+        "@types/helmet": "^0.0.43",
+        "@types/memory-cache": "^0.2.0",
+        "@types/node-fetch": "^2.1.6",
+        "@types/socket.io": "^2.1.2",
+        "@types/socket.io-client": "^1.4.32",
+        "concurrently": "^4.1.0",
+        "copyfiles": "^2.1.0",
+        "gulp": "^4.0.0",
+        "gulp-clean-css": "^4.0.0",
+        "ts-node-dev": "^1.0.0-pre.32",
+        "tslint": "^5.13.1",
+        "tslint-eslint-rules": "^5.4.0",
+        "typescript": "^3.3.3333",
+        "wait-on": "^3.2.0",
+        "yarn": "^1.13.0"
+    },
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "compression": "^1.7.4",
+        "dotenv": "^7.0.0",
+        "ejs": "^2.6.1",
+        "express": "^4.16.4",
+        "helmet": "^3.16.0",
+        "memory-cache": "^0.2.0",
+        "node-fetch": "^2.3.0",
+        "socket.io": "^2.2.0"
+    }
+}

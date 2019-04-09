@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "allowJs": false,
+        "allowSyntheticDefaultImports": true,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "alwaysStrict": true,
+        "downlevelIteration": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "lib": ["esnext"],
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "outDir": "./server/dist",
+        "rootDir": "./server/src",
+        "skipLibCheck": true,
+        "sourceMap": false,
+        "strictNullChecks": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "target": "es5"
+    },
+    "include": [
+        "server/**/*.ts",
+    ],
+    "exclude": [
+        "./node_modules",
+        "./server/dist"
+    ]
+}
