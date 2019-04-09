@@ -1,12 +1,6 @@
-import { ShortCryptoPrice } from '../../../shared/types/CryptoCompare'
-
-interface StateProps {
-    currentPrices?: ShortCryptoPrice
-}
+interface StateProps {}
 
 export class State {
-    public currentPrices = this.props.currentPrices || undefined
-
     constructor(private props: StateProps) {}
 
     public set(key: string, value: any) {

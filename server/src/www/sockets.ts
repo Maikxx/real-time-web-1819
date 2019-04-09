@@ -1,22 +1,20 @@
 import { Server } from 'http'
 import { PollType } from '../../../shared/types/Poll'
 import { setupPolling, onPollResult } from '../www/poll'
-import { State } from '../services/State'
 import socket from 'socket.io'
 
 export function setupSockets(server: Server) {
     const socketio: socket.Server = socket(server)
     const poll = setupPolling(false)
-    const state = new State({ })
 
     poll.run()
-    socketio.on('connection', onSocketConnection(poll, state))
+    socketio.on('connection', onSocketConnection(poll))
 }
 
-function onSocketConnection(poll: PollType, state: State) {
+function onSocketConnection(poll: PollType) {
     return function(socket: socket.Socket) {
         console.info('A user connected')
 
-        poll.on('result', onPollResult(socket, state))
+        poll.on('result', onPollResult(socket))
     }
 }

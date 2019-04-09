@@ -1,7 +1,6 @@
 import fetch from 'node-fetch'
 import Poll from 'async-polling'
 import { ShortCryptoPrice } from '../../../shared/types/CryptoCompare'
-import { State } from '../services/State'
 import socket from 'socket.io'
 import _ from 'lodash'
 
@@ -21,19 +20,13 @@ export function setupPolling(full?: boolean) {
             console.error(error)
             throw new Error(error)
         }
-    }, 500)
+    }, 1000)
 
     return poll
 }
 
-export function onPollResult(socket: socket.Socket, state: State) {
+export function onPollResult(socket: socket.Socket) {
     return function(newData: ShortCryptoPrice) {
-        const previousData = state.get('currentPrices')
-
-        if (!_.isEqual(newData, previousData)) {
-            state.set('currentPrices', newData)
-
-            socket.emit('new-data-gathered', newData)
-        }
+        socket.emit('new-data-gathered', newData)
     }
 }
