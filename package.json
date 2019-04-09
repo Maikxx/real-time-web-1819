@@ -51,5 +51,9 @@
         "memory-cache": "^0.2.0",
         "node-fetch": "^2.3.0",
         "socket.io": "^2.2.0"
+    },
+    "engineStrict": true,
+    "engines": {
+        "node": "8.11.0"
     }
 }
