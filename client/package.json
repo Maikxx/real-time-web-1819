@@ -1,0 +1,25 @@
+{
+  "name": "client",
+  "private": true,
+  "version": "1.0.0",
+  "author": "Maikel van Veen <maikeloo10@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn clear-dist && parcel build ./scripts/index.ts --no-source-maps -d ../server/public/scripts",
+    "start-client": "parcel watch ./scripts/index.ts --no-source-maps -d ../server/public/scripts",
+    "clear-dist": "rm -rf ../server/public/scripts"
+  },
+  "devDependencies": {
+    "@types/socket.io": "^2.1.2",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "parcel-bundler": "^1.12.3",
+    "tslint": "^5.15.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.4.2"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "socket.io-client": "^2.2.0"
+  }
+}

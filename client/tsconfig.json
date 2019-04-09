@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "lib": ["esnext", "dom"],
+        "rootDir": "./scripts",
+        "target": "esnext",
+        "module": "esnext",
+        "outDir": "dist",
+        "sourceMap": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "noUnusedLocals": true,
+        "downlevelIteration": true
+    },
+    "include": [
+        "./scripts/**/*.ts"
+    ],
+    "exclude": [
+        "./node_modules"
+    ]
+}
