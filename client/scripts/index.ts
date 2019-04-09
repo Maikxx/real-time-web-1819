@@ -1,8 +1,13 @@
 import io from 'socket.io-client'
+import { ShortCryptoPrice } from '../../shared/types/CryptoCompare'
 
 const socket = io()
 
-socket.emit('test')
-socket.on('test', () => {
-    console.log('Success')
+socket.on('new-data-gathered', (data: ShortCryptoPrice) => {
+    const { BTC, ETH } = data
+    const dataContainer = document.querySelector('#crypto-data')
+
+    if (dataContainer) {
+        dataContainer.innerHTML = `Bitcoin: €${BTC.EUR}, Etherium: €${ETH.EUR}`
+    }
 })
