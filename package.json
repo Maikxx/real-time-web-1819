@@ -5,10 +5,10 @@
     "author": "Maikel van Veen <maikeloo10@hotmail.com>",
     "private": true,
     "scripts": {
-        "build": "tsc && yarn prebuild-client && yarn copy-static-assets",
+        "build-server": "tsc && yarn prebuild-client && yarn copy-static-assets",
         "copy-static-assets": "yarn copy-views-directory",
         "copy-views-directory": "copyfiles -E -u 2 \"./server/src/views/**/*\" \"./server/dist\"",
-        "heroku-postbuild": "cd ./client && yarn && yarn build",
+        "heroku-postbuild": "yarn build-server && cd ./client && yarn && yarn build",
         "minify-css": "gulp minifyCss",
         "open-chrome": "wait-on http://localhost:3000 && open -a \"Google Chrome\" http://localhost:3000",
         "prebuild-client": "yarn minify-css",
