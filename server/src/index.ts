@@ -5,12 +5,10 @@ import socketIO from 'socket.io'
 import http from 'http'
 import compression from 'compression'
 import { getIndexRoute } from './routes/indexRoute'
-// import bodyParser from 'body-parser'
 
 (async() => {
     const app = express()
     const server = new http.Server(app)
-    // const urlencodedParser = bodyParser.urlencoded({ extended: false })
     const socketio = socketIO(server)
 
     app.use(helmet())
