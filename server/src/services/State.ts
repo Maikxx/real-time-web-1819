@@ -1,7 +1,7 @@
 interface StateProps {}
 
 export class State {
-    constructor(private props: StateProps) {}
+    constructor(public props: StateProps) {}
 
     public set(key: string, value: any) {
         this[key] = value
