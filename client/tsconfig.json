@@ -19,7 +19,8 @@
         "downlevelIteration": true
     },
     "include": [
-        "./scripts/**/*.ts"
+        "./scripts/**/*.ts",
+        "../shared/**/*.ts"
     ],
     "exclude": [
         "./node_modules"
