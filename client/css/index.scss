@@ -1,11 +1,18 @@
 @import './fonts.scss';
 @import './base.scss';
 
+$color-white: #FFFFFF;
+$color-black: #000000;
+$color-brand: #0E6E6C;
+$color-secondary: #00C9C7;
+$color-opal: #F3EADA;
+$color-action: #FFA17A;
+
 body {
     display: flex;
     line-height: 1;
-    background-color: #FFFFFF;
-    color: #000000;
+    background-color: $color-white;
+    color: $color-black;
     overflow-x: hidden;
     font-family: 'Fira Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -20,23 +27,87 @@ body main {
     font-weight: bold;
 }
 
-.PageTitle {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-}
-
 #crypto-data {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
     transition: color .2s ease;
 
     &.up {
-        color: green;
+        color: teal;
     }
 
     &.down {
         color: crimson;
+    }
+}
+
+.Cover {
+    background-color: teal;
+    color: #FFFFFF;
+
+    .PageTitle {
+        text-align: center;
+        font-size: 2em;
+        margin-top: 5em;
+    }
+
+    .CoverView {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        &__title {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: .5em;
+        }
+
+        &__field {
+            & + .CoverView__field {
+                margin-top: 1em;
+            }
+        }
+
+        &__label-text {
+            display: block;
+            margin-bottom: .5em;
+        }
+
+        &__input {
+            padding: 1em;
+            min-width: 30em;
+            border-radius: 2px;
+            border: 0;
+        }
+
+        .Button {
+            margin-top: 2em;
+        }
+    }
+}
+
+.Button {
+    background-color: $color-white;
+    color: $color-black;
+    border: 0;
+    padding: 1em 2em;
+    border-radius: 2px;
+    transition: .2s ease all;
+
+    &--grow {
+        display: inline-block;
+        width: 100%;
+    }
+
+    &:hover {
+        background-color: darken($color-white, 5%);
+    }
+
+    &--action {
+        background-color: $color-action;
+        color: $color-black;
+
+        &:hover {
+            background-color: darken($color-action, 5%);
+        }
     }
 }

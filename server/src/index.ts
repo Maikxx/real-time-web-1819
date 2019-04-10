@@ -5,6 +5,7 @@ import http from 'http'
 import compression from 'compression'
 import { getIndexRoute } from './routes/indexRoute'
 import { setupSockets } from './www/sockets'
+import { getLoginRoute } from './routes/loginRoute'
 
 (async() => {
     const app = express()
@@ -19,6 +20,7 @@ import { setupSockets } from './www/sockets'
     app.set('views', path.join(__dirname, 'views'))
 
     app.get('/', getIndexRoute)
+    app.get('/login', getLoginRoute)
 
     server.listen(({ port: process.env.PORT || 3000 }), () => {
         console.info(`App is now open for action on port ${process.env.PORT || 3000}.`)
