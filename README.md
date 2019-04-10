@@ -25,6 +25,8 @@ This platform makes it possible for groups of friends to participate in a game o
     On this page the user sees the currency, the group name and the participants. The participants are shown in a table form, where their name, their current bet and their amount of points is visible.
     On the row with your own name, which is highlighted, your betting field will be an input field with your current bet as default. You can change your bet by simply changing this dropdown.
 
+A wireflow of this will be added **shortly**.
+
 **Bonus**
 
 If I somehow have time to spare, I want to take up these points:
