@@ -332,3 +332,30 @@ q::after {
 fieldset {
     border: 0;
 }
+
+.PageTitle,
+#crypto-data {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.PageTitle {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
+
+#crypto-data {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    transition: color .2s ease;
+}
+
+#crypto-data.up {
+    color: green;
+}
+
+#crypto-data.down {
+    color: crimson;
+}

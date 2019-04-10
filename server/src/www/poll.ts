@@ -11,7 +11,9 @@ export function setupPolling(full?: boolean) {
             const route = full
                 ? `pricemultifull`
                 : `pricemulti`
-            const response = await fetch(`${urlBase}/data/${route}?fsyms=BTC,ETH&tsyms=USD,EUR&api_key=${process.env.CRYPTO_COMPARE_KEY}`)
+            const cryptoCoins = [`BTC`, `ETH`, `XMR`, `XLM`, `LTC`, `BCH`]
+            const fsyms = `fsyms=${cryptoCoins.join(',')}`
+            const response = await fetch(`${urlBase}/data/${route}?${fsyms}&tsyms=USD,EUR&api_key=${process.env.CRYPTO_COMPARE_KEY}`)
             const data = await response.json()
 
             end(undefined, data)
