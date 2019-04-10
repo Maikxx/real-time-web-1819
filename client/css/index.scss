@@ -46,7 +46,7 @@ body main {
     .PageTitle {
         text-align: center;
         font-size: 2em;
-        margin-top: 5em;
+        margin-top: 1%;
     }
 
     .CoverView {
@@ -75,12 +75,20 @@ body main {
         &__input {
             padding: 1em;
             min-width: 30em;
+            width: 100%;
             border-radius: 2px;
             border: 0;
         }
 
         .Button {
             margin-top: 2em;
+            width: 100%;
+        }
+
+        .Link {
+            margin-top: 1em;
+            text-align: center;
+            width: 100%;
         }
     }
 }
@@ -93,11 +101,6 @@ body main {
     border-radius: 2px;
     transition: .2s ease all;
 
-    &--grow {
-        display: inline-block;
-        width: 100%;
-    }
-
     &:hover {
         background-color: darken($color-white, 5%);
     }
@@ -109,5 +112,17 @@ body main {
         &:hover {
             background-color: darken($color-action, 5%);
         }
+    }
+}
+
+.Link {
+    color: $color-opal;
+    text-decoration: none;
+    display: inline-block;
+    transition: .2s ease color;
+
+    &:hover {
+        color: darken($color-opal, 5%);
+        text-decoration: underline;
     }
 }
