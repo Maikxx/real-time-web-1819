@@ -1,0 +1,42 @@
+@import './fonts.scss';
+@import './base.scss';
+
+body {
+    display: flex;
+    line-height: 1;
+    background-color: #FFFFFF;
+    color: #000000;
+    overflow-x: hidden;
+    font-family: 'Fira Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body main {
+    width: 100%;
+}
+
+.PageTitle,
+#crypto-data {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.PageTitle {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
+
+#crypto-data {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    transition: color .2s ease;
+
+    &.up {
+        color: green;
+    }
+
+    &.down {
+        color: crimson;
+    }
+}
