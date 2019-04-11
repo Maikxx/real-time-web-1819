@@ -134,3 +134,9 @@ export function postLoginRoute(request: express.Request, response: express.Respo
 
     response.redirect('/dashboard')
 }
+
+export function postLogOutRoute(request: express.Request, response: express.Response) {
+    request.logout()
+
+    response.redirect('/login')
+}

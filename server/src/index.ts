@@ -24,6 +24,7 @@ import {
     getGroupDetailRoute,
     postSignUpRoute,
     postLoginRoute,
+    postLogOutRoute,
 } from './routes/routes'
 
 const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
@@ -66,6 +67,7 @@ const LocalStrategy = passportLocal.Strategy
         failureRedirect: '/login',
         failureFlash: true,
     }), postLoginRoute)
+    app.post('/logout', postLogOutRoute)
 
     server.listen(({ port: process.env.PORT || 3000 }), () => {
         console.info(`App is now open for action on port ${process.env.PORT || 3000}.`)

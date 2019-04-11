@@ -11,7 +11,8 @@ This app uses real-time technologies, like web sockets to enable a useful user e
     2. [Bonus features](#Bonus-features)
 2. [API](#API)
 3. [Issues](#Issues)
-4. [License](#License)
+4. [Sources](#Sources)
+5. [License](#License)
 
 
 ## Concept
@@ -67,6 +68,10 @@ I think that I can make something work with this API by polling a few times a se
 * [ ] Render all groups server-side in which the current user is present (_/groups/list_).
 * [ ] Render a groups detail view (_/groups/detail_) correctly and implement editing you current row.
 * [ ] Implement sockets on (_/groups/join_ & _/groups/detail_).
+
+## Sources
+
+* CryptoBettings authentication model is heavily inspired by [this](https://github.com/timtamimi/node.js-passport.js-template) example.
 
 ## License
 

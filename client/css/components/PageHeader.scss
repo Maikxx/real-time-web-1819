@@ -5,6 +5,10 @@
     padding: 2em;
     background-color: $color-brand;
 
+    &__nav {
+        justify-content: space-between;
+    }
+
     &__home-link {
         display: inline-block;
         text-decoration: none;
@@ -14,5 +18,10 @@
         &:hover {
             color: $color-opal;
         }
+    }
+
+    &__logout {
+        padding: .5em;
+        border: 0;
     }
 }
