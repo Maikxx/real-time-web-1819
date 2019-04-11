@@ -12,8 +12,10 @@ import { getGroupJoinRoute } from './routes/groupJoinRoute'
 import { getGroupCreateRoute } from './routes/groupCreateRoute'
 import { getGroupListRoute } from './routes/groupListRoute'
 import { getGroupDetailRoute } from './routes/groupDetailRotue'
+import { setupDatabase } from './database/setupDatabase'
 
-(async() => {
+(async () => {
+    await setupDatabase()
     const app = express()
     const server = new http.Server(app)
     setupSockets(server)

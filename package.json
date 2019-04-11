@@ -30,6 +30,7 @@
         "@types/lodash": "^4.14.123",
         "@types/memory-cache": "^0.2.0",
         "@types/node-fetch": "^2.1.6",
+        "@types/pg": "^7.4.14",
         "@types/socket.io": "^2.1.2",
         "@types/socket.io-client": "^1.4.32",
         "concurrently": "^4.1.0",
@@ -56,6 +57,7 @@
         "lodash": "^4.17.11",
         "memory-cache": "^0.2.0",
         "node-fetch": "^2.3.0",
+        "pg": "^7.9.0",
         "socket.io": "^2.2.0"
     },
     "engineStrict": true,
