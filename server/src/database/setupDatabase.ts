@@ -1,12 +1,19 @@
 require('dotenv').config()
 import { Client } from 'pg'
 
-export const database = new Client({
-    host: process.env.PG_HOST,
-    database: process.env.PG_DATABASE,
-    port: Number(process.env.PG_PORT),
-    password: process.env.PG_PASSWORD,
-})
+const DATABASE_CONNECTION_OPTIONS = process.env.NODE_ENV === 'production'
+    ? {
+        ssl: true,
+        connectionString: process.env.DATABASE_URL,
+    }
+    : {
+        host: process.env.PG_HOST,
+        database: process.env.PG_DATABASE,
+        port: Number(process.env.PG_PORT),
+        password: process.env.PG_PASSWORD,
+    }
+
+export const database = new Client(DATABASE_CONNECTION_OPTIONS)
 
 export async function setupDatabase() {
     try {
