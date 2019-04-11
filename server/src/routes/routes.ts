@@ -4,14 +4,13 @@ import bcrypt from 'bcrypt'
 import { CryptoCurrency } from '../types/CryptoCurrency'
 import { getAllCryptoCurrencies } from '../database/crypto_currencies/getAllCryptoCurrencies'
 import { database } from '../database/setupDatabase'
+import { User } from '../types/User'
 
 export function getIndexRoute(request: express.Request, response: express.Response) {
     response.status(200).render('view/index')
 }
 
 export function getLoginRoute(request: express.Request, response: express.Response) {
-    console.log(request.user)
-
     if (request.isAuthenticated()) {
         response.redirect('/dashboard')
     } else {
@@ -20,21 +19,43 @@ export function getLoginRoute(request: express.Request, response: express.Respon
 }
 
 export function getSignUpRoute(request: express.Request, response: express.Response) {
-    console.log(request.user)
-
-    response.status(200).render('view/signup')
+    if (request.isAuthenticated()) {
+        response.redirect('/dashboard')
+    } else {
+        response.status(200).render('view/signup')
+    }
 }
 
 export function getDashboardRoute(request: express.Request, response: express.Response) {
-    response.status(200).render('view/dashboard')
+    if (request.isAuthenticated()) {
+        const user: User = request.user && request.user[0]
+
+        if (!user) {
+            throw new Error('User not found')
+        }
+
+        response.status(200).render('view/dashboard', {
+            user,
+        })
+    } else {
+        response.redirect('/login')
+    }
 }
 
 export function getGroupListRoute(request: express.Request, response: express.Response) {
-    response.status(200).render('view/groups/list')
+    if (request.isAuthenticated()) {
+        response.status(200).render('view/groups/list')
+    } else {
+        response.redirect('/login')
+    }
 }
 
 export function getGroupJoinRoute(request: express.Request, response: express.Response) {
-    response.status(200).render('view/groups/join')
+    if (request.isAuthenticated()) {
+        response.status(200).render('view/groups/join')
+    } else {
+        response.redirect('/login')
+    }
 }
 
 interface GroupDetailRouteParams {
@@ -44,21 +65,29 @@ interface GroupDetailRouteParams {
 export function getGroupDetailRoute(request: express.Request, response: express.Response) {
     const { id } = request.params as GroupDetailRouteParams
 
-    response.status(200).render('view/groups/detail', {
-        id,
-    })
+    if (request.isAuthenticated()) {
+        response.status(200).render('view/groups/detail', {
+            id,
+        })
+    } else {
+        response.redirect('/login')
+    }
 }
 
 export async function getGroupCreateRoute(request: express.Request, response: express.Response) {
-    try {
-        const cryptoCurrencies: CryptoCurrency[] = await getAllCryptoCurrencies()
+    if (request.isAuthenticated()) {
+        try {
+            const cryptoCurrencies: CryptoCurrency[] = await getAllCryptoCurrencies()
 
-        response.status(200).render('view/groups/create', {
-            cryptoCurrencies,
-        })
-    } catch (error) {
-        console.error(error.message)
-        response.status(500).redirect('/')
+            response.status(200).render('view/groups/create', {
+                cryptoCurrencies,
+            })
+        } catch (error) {
+            console.error(error.message)
+            response.status(500).redirect('/')
+        }
+    } else {
+        response.redirect('/login')
     }
 }
 
