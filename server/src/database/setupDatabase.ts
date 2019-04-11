@@ -36,8 +36,6 @@ export async function setupDatabase() {
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
 
-            ALTER TABLE public.users OWNER to admin;
-
             CREATE TABLE IF NOT EXISTS crypto_currencies
             (
                 _id SERIAL PRIMARY KEY,
@@ -45,8 +43,6 @@ export async function setupDatabase() {
                 symbol TEXT NOT NULL,
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
-
-            ALTER TABLE public.crypto_currencies OWNER to admin;
 
             CREATE TABLE IF NOT EXISTS group_participants
             (
@@ -57,8 +53,6 @@ export async function setupDatabase() {
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
 
-            ALTER TABLE public.group_participants OWNER to admin;
-
             CREATE TABLE IF NOT EXISTS groups
             (
                 _id SERIAL PRIMARY KEY,
@@ -67,8 +61,6 @@ export async function setupDatabase() {
                 group_participants INTEGER[],
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
-
-            ALTER TABLE public.groups OWNER to admin;
             `
         )
     } catch (error) {
