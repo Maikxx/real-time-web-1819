@@ -1,0 +1,13 @@
+@import '../variables/colors.scss';
+
+.Link {
+    color: $color-opal;
+    text-decoration: none;
+    display: inline-block;
+    transition: .2s ease color;
+
+    &:hover {
+        color: darken($color-opal, 5%);
+        text-decoration: underline;
+    }
+}

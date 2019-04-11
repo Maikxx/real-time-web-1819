@@ -1,0 +1,14 @@
+.Row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Row--wrap {
+    flex-wrap: wrap;
+}
+
+.ActionRow {
+    justify-content: center;
+    min-width: 80vw;
+}

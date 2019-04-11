@@ -1,0 +1,39 @@
+@import '../variables/colors.scss';
+
+.Button {
+    background-color: $color-white;
+    color: $color-black;
+    border: 0;
+    padding: 1em 2em;
+    border-radius: 2px;
+    transition: .2s ease all;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+
+    &:hover {
+        background-color: darken($color-white, 5%);
+    }
+
+    &--action {
+        background-color: $color-action;
+        color: $color-black;
+
+        &:hover {
+            background-color: darken($color-action, 5%);
+        }
+    }
+
+    &--block {
+        padding: 5em;
+        flex: 1;
+        background-color: $color-brand;
+        border-radius: 0;
+        white-space: nowrap;
+        color: $color-white;
+
+        &:hover {
+            background-color: darken($color-brand, 5%);
+        }
+    }
+}

@@ -1,0 +1,18 @@
+@import '../variables/colors.scss';
+
+.PageHeader {
+    width: 100%;
+    padding: 2em;
+    background-color: $color-brand;
+
+    &__home-link {
+        display: inline-block;
+        text-decoration: none;
+        color: $color-white;
+        transition: .2s ease color;
+
+        &:hover {
+            color: $color-opal;
+        }
+    }
+}
