@@ -48,6 +48,13 @@ This API does not contain a websocket connection, unfortunately, but I found the
 
 I think that I can make something work with this API by polling a few times a second to simulate fully real-time data.
 
+## Todo
+
+* Implement client-side rendering of the join groups page.
+* Implement joining groups.
+* Implemnent login and signup.
+* Get all the available cryptocurrencies from the API to list on the create a group page.
+
 ## License
 
 This repository is licensed as [MIT](LICENSE) by [Maikel van Veen](https://github.com/maikxx).

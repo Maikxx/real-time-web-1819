@@ -16,18 +16,19 @@
             <section class="CenterView">
                 <form action="#" class="Form">
                     <fieldset>
-                        <legend class="PageSubTitle">Join a group</legend>
+                        <legend class="PageSubTitle">Create a group</legend>
                         <label class="Field">
                             <span class="Field__title">
-                                Group
+                                Group name
                             </span>
                             <div class="Field__content">
-                                <select name="groupId" class="Field__input Input" required>
-                                    <option value="" disabled selected>
-                                        Select a group
-                                    </option>
-                                    <option value="test">Test group</option>
-                                </select>
+                                <input
+                                    type="text"
+                                    name="groupName"
+                                    required="required"
+                                    placeholder="My awesome group"
+                                    class="Input Field__input"
+                                >
                             </div>
                         </label>
 
@@ -36,23 +37,16 @@
                                 Group currency
                             </span>
                             <div class="Field__content">
-                                <span>BTC</span>
-                            </div>
-                        </div>
-
-                        <div class="Field Field--is-column">
-                            <span class="Field__title">
-                                Users in this group
-                            </span>
-                            <div class="Field__content">
-                                <ul class="Row Row--wrap">
-                                    This is dynamically rendered on the client
-                                </ul>
+                                <select name="groupCurrency" required="required" class="Input Field__input">
+                                    <option value="" disabled selected>
+                                        Select a currency
+                                    </option>
+                                </select>
                             </div>
                         </div>
 
                         <button type="submit" class="Button Button--action Form__submit-button">
-                            Join
+                            Create group
                         </button>
                     </fieldset>
                 </form>
