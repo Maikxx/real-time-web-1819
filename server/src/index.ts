@@ -1,20 +1,39 @@
+require('dotenv').config()
 import express from 'express'
 import helmet from 'helmet'
 import path from 'path'
 import http from 'http'
 import compression from 'compression'
-import { getIndexRoute } from './routes/indexRoute'
-import { setupSockets } from './www/sockets'
-import { getLoginRoute } from './routes/loginRoute'
-import { getSignUpRoute } from './routes/signUpRoute'
-import { getDashboardRoute } from './routes/dashboardRoute'
-import { getGroupJoinRoute } from './routes/groupJoinRoute'
-import { getGroupCreateRoute } from './routes/groupCreateRoute'
-import { getGroupListRoute } from './routes/groupListRoute'
-import { getGroupDetailRoute } from './routes/groupDetailRotue'
-import { setupDatabase } from './database/setupDatabase'
+import cookieParser from 'cookie-parser'
+import bodyParser from 'body-parser'
+import passportLocal from 'passport-local'
+import passport from 'passport'
+import expressSession from 'express-session'
+import bcrypt from 'bcrypt'
 
-(async () => {
+import { setupDatabase, database } from './database/setupDatabase'
+import { setupSockets } from './www/sockets'
+import {
+    getIndexRoute,
+    getLoginRoute,
+    getSignUpRoute,
+    getDashboardRoute,
+    getGroupJoinRoute,
+    getGroupCreateRoute,
+    getGroupListRoute,
+    getGroupDetailRoute,
+    postSignUpRoute,
+    postLoginRoute,
+} from './routes/routes'
+
+const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
+const LocalStrategy = passportLocal.Strategy
+
+; (async () => {
+    if (!EXPRESS_SESSION_SECRET) {
+        throw new Error('You don\'t seem to have passed the session secret key correctly.')
+    }
+
     await setupDatabase()
     const app = express()
     const server = new http.Server(app)
@@ -22,6 +41,11 @@ import { setupDatabase } from './database/setupDatabase'
 
     app.use(helmet())
     app.use(compression())
+    app.use(cookieParser())
+    app.use(bodyParser.urlencoded({ extended: true }))
+    app.use(expressSession({ secret: EXPRESS_SESSION_SECRET, resave: false, saveUninitialized: true }))
+    app.use(passport.initialize())
+    app.use(passport.session())
     app.use(express.static(path.join(__dirname, '../public')))
 
     app.set('view engine', 'ejs')
@@ -36,7 +60,47 @@ import { setupDatabase } from './database/setupDatabase'
     app.get('/groups/list', getGroupListRoute)
     app.get('/groups/:id', getGroupDetailRoute)
 
+    app.post('/signup', postSignUpRoute)
+    app.post('/login', passport.authenticate('local', {
+        successRedirect: '/dashboard',
+        failureRedirect: '/login',
+        failureFlash: true,
+    }), postLoginRoute)
+
     server.listen(({ port: process.env.PORT || 3000 }), () => {
         console.info(`App is now open for action on port ${process.env.PORT || 3000}.`)
     })
 })()
+
+passport.use('local', new LocalStrategy({
+    passReqToCallback: true,
+    usernameField: 'email',
+    passwordField: 'password',
+}, (request: express.Request, email: string, password: string, done: Function) => {
+    (async () => {
+        try {
+            const { rows } = await database.query('SELECT * FROM users WHERE email = $1;', [email])
+
+            if (!rows || rows.length === 0) {
+                return done(null, false)
+            } else {
+                const passwordsDoMatch = await bcrypt.compare(password, rows[0].password)
+
+                if (passwordsDoMatch) {
+                    return done(null, [rows[0]])
+                }
+            }
+        } catch (error) {
+            console.error(error.message)
+            return done(error)
+        }
+    })()
+}))
+
+passport.serializeUser((user, done) => {
+    done(null, user)
+})
+
+passport.deserializeUser((user, done) => {
+    done(null, user)
+})

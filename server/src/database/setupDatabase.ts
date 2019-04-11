@@ -23,7 +23,7 @@ export async function setupDatabase() {
             (
                 _id SERIAL PRIMARY KEY,
                 email TEXT NOT NULL UNIQUE,
-                userName TEXT NOT NULL,
+                username TEXT NOT NULL,
                 password TEXT NOT NULL,
                 joined_groups INTEGER[],
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
