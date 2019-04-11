@@ -5,11 +5,12 @@
     appearance: none;
     min-width: 30em;
     width: 100%;
-    padding: 1em 2em;
+    padding: .5em 1em;
     color: $color-black;
     border: 1px solid $color-black;
     background-color: $color-white;
     border-radius: 2px;
+    font-size: 1em;
 
     &--small {
         width: 5em;

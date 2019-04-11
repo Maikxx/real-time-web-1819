@@ -1,29 +1,15 @@
 .Field {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
     &__title {
-        flex: 2;
+        display: block;
         font-weight: bold;
     }
 
     &__content {
-        margin-left: 1em;
-        flex: 4;
+        margin-top: 1em;
+        display: block;
     }
 
     & + .Field {
-        margin-top: 1em;
-    }
-
-    &--is-column {
-        flex-direction: column;
-        align-items: flex-start;
-
-        .Field__content {
-            margin-left: 0;
-            margin-top: .5em;
-        }
+        margin-top: 2em;
     }
 }
