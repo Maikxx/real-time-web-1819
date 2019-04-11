@@ -39,8 +39,13 @@ body main {
 @import './components/CenterView.scss';
 @import './components/Row.scss';
 @import './components/PageHeader.scss';
+@import './components/Field.scss';
+@import './components/Input.scss';
+@import './components/Form.scss';
 
 .PageSubTitle {
     margin-bottom: 2em;
     text-align: center;
+    font-weight: bold;
+    font-size: 2em;
 }

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ../partials/head %>
+        <link rel="stylesheet" type="text/css" href="../../../../css/index.css">
+    </head>
+    <body>
+        <main>
+            <header class="PageHeader">
+                <nav class="PageHeader__nav Row">
+                    <a href="/" class="PageHeader__home-link">
+                        <h1 class="PageTitle">CryptoBetting (with friends)</h1>
+                    </a>
+                </nav>
+            </header>
+            <section class="CenterView">
+                <form action="#" class="Form">
+                    <fieldset>
+                        <legend class="PageSubTitle">Join a group</legend>
+                        <label class="Field">
+                            <span class="Field__title">
+                                Group
+                            </span>
+                            <div class="Field__content">
+                                <select name="" class="Field__input Input">
+                                    <option value="" disabled="disabled">
+                                        Select a group
+                                    </option>
+                                    <option value="test">Test group</option>
+                                </select>
+                            </div>
+                        </label>
+
+                        <div class="Field">
+                            <span class="Field__title">
+                                Group currency
+                            </span>
+                            <div class="Field__content">
+                                <span>BTC</span>
+                            </div>
+                        </div>
+
+                        <div class="Field Field--is-column">
+                            <span class="Field__title">
+                                Users in this group
+                            </span>
+                            <div class="Field__content">
+                                <ul class="Row Row--wrap">
+                                    This is dynamically rendered on the client
+                                </ul>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="Button Button--action Form__submit-button">
+                            Join
+                        </button>
+                    </fieldset>
+                </form>
+            </section>
+        </main>
+    </body>
+</html>

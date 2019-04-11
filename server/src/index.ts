@@ -8,6 +8,7 @@ import { setupSockets } from './www/sockets'
 import { getLoginRoute } from './routes/loginRoute'
 import { getSignUpRoute } from './routes/signUpRoute'
 import { getDashboardRoute } from './routes/dashboardRoute'
+import { getGroupJoinRoute } from './routes/groupJoinRoute';
 
 (async() => {
     const app = express()
@@ -25,6 +26,7 @@ import { getDashboardRoute } from './routes/dashboardRoute'
     app.get('/login', getLoginRoute)
     app.get('/signup', getSignUpRoute)
     app.get('/dashboard', getDashboardRoute)
+    app.get('/groups/join', getGroupJoinRoute)
 
     server.listen(({ port: process.env.PORT || 3000 }), () => {
         console.info(`App is now open for action on port ${process.env.PORT || 3000}.`)

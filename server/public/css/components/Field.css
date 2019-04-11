@@ -1,0 +1,1 @@
+.Field{display:flex;flex-direction:row;align-items:center}.Field__title{flex:2;font-weight:700}.Field__content{margin-left:1em;flex:4}.Field+.Field{margin-top:1em}.Field--is-column{flex-direction:column;align-items:flex-start}.Field--is-column .Field__content{margin-left:0;margin-top:.5em}
