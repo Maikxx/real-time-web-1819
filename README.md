@@ -61,13 +61,14 @@ I think that I can make something work with this API by polling a few times a se
 
 ## Issues
 
-* [ ] Implemnent login and signup (_/login_ & _/signup_).
-* [ ] Implement client-side rendering of the join groups page (_/groups/join_).
-* [ ] Implement joining groups (_/groups/join_).
+* [ ] Add input validation and error feedback (**LOW PRIO**).
+* [ ] Implement client-side rendering of the join groups page (_/groups/join_) (**HIGH PRIO**).
+* [ ] Implement joining groups (_/groups/join_) (**HIGH PRIO**).
+* [ ] Implement sockets on (_/groups/join_ & _/groups/detail_) (**HIGH PRIO**).
+* [ ] Render a groups detail view (_/groups/detail_) correctly and implement editing you current row (**HIGH PRIO**).
+* [ ] Render all groups server-side in which the current user is present (_/groups/list_) (**HIGH PRIO**).
 * [X] Get all the available cryptocurrencies from the API to list on the create a group page (_/groups/create_).
-* [ ] Render all groups server-side in which the current user is present (_/groups/list_).
-* [ ] Render a groups detail view (_/groups/detail_) correctly and implement editing you current row.
-* [ ] Implement sockets on (_/groups/join_ & _/groups/detail_).
+* [X] Implement login and signup (_/login_ & _/signup_).
 
 ## Sources
 
