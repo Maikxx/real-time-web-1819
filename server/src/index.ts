@@ -73,10 +73,9 @@ const LocalStrategy = passportLocal.Strategy
 })()
 
 passport.use('local', new LocalStrategy({
-    passReqToCallback: true,
     usernameField: 'email',
     passwordField: 'password',
-}, (request: express.Request, email: string, password: string, done: Function) => {
+}, (email: string, password: string, done: Function) => {
     (async () => {
         try {
             const { rows } = await database.query('SELECT * FROM users WHERE email = $1;', [email])
