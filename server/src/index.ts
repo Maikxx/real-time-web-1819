@@ -11,6 +11,7 @@ import { getDashboardRoute } from './routes/dashboardRoute'
 import { getGroupJoinRoute } from './routes/groupJoinRoute'
 import { getGroupCreateRoute } from './routes/groupCreateRoute'
 import { getGroupListRoute } from './routes/groupListRoute'
+import { getGroupDetailRoute } from './routes/groupDetailRotue'
 
 (async() => {
     const app = express()
@@ -31,6 +32,7 @@ import { getGroupListRoute } from './routes/groupListRoute'
     app.get('/groups/join', getGroupJoinRoute)
     app.get('/groups/create', getGroupCreateRoute)
     app.get('/groups/list', getGroupListRoute)
+    app.get('/groups/:id', getGroupDetailRoute)
 
     server.listen(({ port: process.env.PORT || 3000 }), () => {
         console.info(`App is now open for action on port ${process.env.PORT || 3000}.`)

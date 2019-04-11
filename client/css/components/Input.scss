@@ -8,4 +8,8 @@
     border: 1px solid $color-black;
     background-color: $color-white;
     border-radius: 2px;
+
+    &--small {
+        min-width: 5em;
+    }
 }
