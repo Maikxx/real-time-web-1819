@@ -7,7 +7,11 @@ import { database } from '../database/setupDatabase'
 import { User } from '../types/User'
 
 export function getIndexRoute(request: express.Request, response: express.Response) {
-    response.status(200).render('view/index')
+    if (request.isAuthenticated()) {
+        response.redirect('/dashboard')
+    } else {
+        response.redirect('/login')
+    }
 }
 
 export function getLoginRoute(request: express.Request, response: express.Response) {
