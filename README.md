@@ -68,6 +68,7 @@ I think that I can make something work with this API by polling a few times a se
 * [ ] Render a groups detail view (_/groups/detail_) correctly and implement editing you current row (**HIGH PRIO**).
 * [ ] Render all groups server-side in which the current user is present (_/groups/list_) (**HIGH PRIO**).
 * [X] Get all the available cryptocurrencies from the API to list on the create a group page (_/groups/create_).
+* [X] Implement group creation (_/groups/create_).
 * [X] Implement login and signup (_/login_ & _/signup_).
 
 ## Sources

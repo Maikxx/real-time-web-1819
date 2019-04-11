@@ -8,7 +8,7 @@
         <main>
             <% include ../../partials/pageHeader %>
             <section class="CenterView">
-                <form action="#" class="Form">
+                <form action="/groups/create" class="Form" method="POST" enctype="application/x-www-form-urlencoded">
                     <fieldset>
                         <legend class="PageSubTitle">Create a group</legend>
                         <label class="Field">
@@ -18,7 +18,7 @@
                             <div class="Field__content">
                                 <input
                                     type="text"
-                                    name="groupName"
+                                    name="name"
                                     required="required"
                                     placeholder="My awesome group"
                                     class="Input Field__input"
@@ -31,7 +31,7 @@
                                 Currency
                             </span>
                             <div class="Field__content">
-                                <select name="groupCurrency" required="required" class="Input Field__input">
+                                <select name="currency" required="required" class="Input Field__input">
                                     <option value="" disabled selected>
                                         Select a currency
                                     </option>

@@ -6,12 +6,10 @@ import http from 'http'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
-import passportLocal from 'passport-local'
 import passport from 'passport'
 import expressSession from 'express-session'
-import bcrypt from 'bcrypt'
 
-import { setupDatabase, database } from './database/setupDatabase'
+import { setupDatabase } from './database/setupDatabase'
 import { setupSockets } from './www/sockets'
 import {
     getIndexRoute,
@@ -26,19 +24,22 @@ import {
     postLoginRoute,
     postLogOutRoute,
 } from './routes/routes'
+import { postCreateGroupRoute } from './routes/post/createGroupRoute'
+import { setupAuth } from './auth/setupAuth'
 
 const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
-const LocalStrategy = passportLocal.Strategy
 
 ; (async () => {
     if (!EXPRESS_SESSION_SECRET) {
         throw new Error('You don\'t seem to have passed the session secret key correctly.')
     }
 
-    await setupDatabase()
     const app = express()
     const server = new http.Server(app)
+
+    await setupDatabase()
     setupSockets(server)
+    setupAuth(passport)
 
     app.use(helmet())
     app.use(compression())
@@ -69,39 +70,9 @@ const LocalStrategy = passportLocal.Strategy
     }), postLoginRoute)
     app.post('/logout', postLogOutRoute)
 
+    app.post('/groups/create', postCreateGroupRoute)
+
     server.listen(({ port: process.env.PORT || 3000 }), () => {
         console.info(`App is now open for action on port ${process.env.PORT || 3000}.`)
     })
 })()
-
-passport.use('local', new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password',
-}, (email: string, password: string, done: Function) => {
-    (async () => {
-        try {
-            const { rows } = await database.query('SELECT * FROM users WHERE email = $1;', [email])
-
-            if (!rows || rows.length === 0) {
-                return done(null, false)
-            } else {
-                const passwordsDoMatch = await bcrypt.compare(password, rows[0].password)
-
-                if (passwordsDoMatch) {
-                    return done(null, [rows[0]])
-                }
-            }
-        } catch (error) {
-            console.error(error.message)
-            return done(error)
-        }
-    })()
-}))
-
-passport.serializeUser((user, done) => {
-    done(null, user)
-})
-
-passport.deserializeUser((user, done) => {
-    done(null, user)
-})

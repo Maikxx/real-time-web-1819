@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 import { CryptoCurrency } from '../types/CryptoCurrency'
 import { getAllCryptoCurrencies } from '../database/crypto_currencies/getAllCryptoCurrencies'
 import { database } from '../database/setupDatabase'
-import { User } from '../types/User'
+import { User, UserSignUpArgs } from '../types/User'
 
 export function getIndexRoute(request: express.Request, response: express.Response) {
     if (request.isAuthenticated()) {
@@ -35,14 +35,15 @@ export function getDashboardRoute(request: express.Request, response: express.Re
         const user: User = request.user && request.user[0]
 
         if (!user) {
-            throw new Error('User not found')
+            throw new Error('User not found!')
         }
 
         response.status(200).render('view/dashboard', {
             user,
         })
     } else {
-        response.redirect('/login')
+        console.error('It looks like you are not logged in!')
+        response.status(403).redirect('/login')
     }
 }
 
@@ -50,7 +51,8 @@ export function getGroupListRoute(request: express.Request, response: express.Re
     if (request.isAuthenticated()) {
         response.status(200).render('view/groups/list')
     } else {
-        response.redirect('/login')
+        console.error('It looks like you are not logged in!')
+        response.status(403).redirect('/login')
     }
 }
 
@@ -58,7 +60,8 @@ export function getGroupJoinRoute(request: express.Request, response: express.Re
     if (request.isAuthenticated()) {
         response.status(200).render('view/groups/join')
     } else {
-        response.redirect('/login')
+        console.error('It looks like you are not logged in!')
+        response.status(403).redirect('/login')
     }
 }
 
@@ -74,7 +77,8 @@ export function getGroupDetailRoute(request: express.Request, response: express.
             id,
         })
     } else {
-        response.redirect('/login')
+        console.error('It looks like you are not logged in!')
+        response.status(403).redirect('/login')
     }
 }
 
@@ -91,19 +95,13 @@ export async function getGroupCreateRoute(request: express.Request, response: ex
             response.status(500).redirect('/')
         }
     } else {
-        response.redirect('/login')
+        console.error('It looks like you are not logged in!')
+        response.status(403).redirect('/login')
     }
 }
 
-interface SignUpArgs {
-    email: string
-    password: string
-    name: string
-    'repeat-password': string
-}
-
 export async function postSignUpRoute(request: express.Request, response: express.Response) {
-    const { email, password: rawPassword, name, 'repeat-password': repeatPassword } = request.body as SignUpArgs
+    const { email, password: rawPassword, name, 'repeat-password': repeatPassword } = request.body as UserSignUpArgs
 
     try {
         if (rawPassword !== repeatPassword) {
@@ -111,14 +109,13 @@ export async function postSignUpRoute(request: express.Request, response: expres
         }
 
         const password = await bcrypt.hash(rawPassword, 5)
-
-        const { rows } = await database.query('SELECT _id FROM users WHERE email = $1', [email])
+        const { rows } = await database.query('SELECT _id FROM users WHERE email = $1;', [email])
 
         if (rows && rows.length > 0) {
             console.error('This user is already registered')
             response.redirect('/signup')
         } else {
-            database.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3)', [ name, email, password ])
+            database.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3);', [ name, email, password ])
             response.redirect('/login')
         }
     } catch (error) {
@@ -137,6 +134,5 @@ export function postLoginRoute(request: express.Request, response: express.Respo
 
 export function postLogOutRoute(request: express.Request, response: express.Response) {
     request.logout()
-
     response.redirect('/login')
 }
