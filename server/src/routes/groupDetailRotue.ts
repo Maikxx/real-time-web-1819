@@ -8,6 +8,6 @@ export function getGroupDetailRoute(request: express.Request, response: express.
     const { id } = request.params as GroupDetailRouteParams
 
     response.status(200).render('view/groups/detail', {
-        id
+        id,
     })
 }

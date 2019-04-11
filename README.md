@@ -4,6 +4,16 @@
 
 This app uses real-time technologies, like web sockets to enable a useful user experience.
 
+## Table of Contents
+
+1. [Concept](#Concept)
+    1. [Application flow](#Application-flow)
+    2. [Bonus features](#Bonus-features)
+2. [API](#API)
+3. [Issues](#Issues)
+4. [License](#License)
+
+
 ## Concept
 
 This platform makes it possible for groups of friends to participate in a game of crypto betting.
@@ -27,7 +37,7 @@ This platform makes it possible for groups of friends to participate in a game o
 
 A wireflow of this will be added **shortly**.
 
-**Bonus**
+### Bonus features
 
 If I somehow have time to spare, I want to take up these points:
 
@@ -48,12 +58,12 @@ This API does not contain a websocket connection, unfortunately, but I found the
 
 I think that I can make something work with this API by polling a few times a second to simulate fully real-time data.
 
-## Todo
+## Issues
 
 * [ ] Implemnent login and signup (_/login_ & _/signup_).
 * [ ] Implement client-side rendering of the join groups page (_/groups/join_).
 * [ ] Implement joining groups (_/groups/join_).
-* [ ] Get all the available cryptocurrencies from the API to list on the create a group page (_/groups/create_).
+* [X] Get all the available cryptocurrencies from the API to list on the create a group page (_/groups/create_).
 * [ ] Render all groups server-side in which the current user is present (_/groups/list_).
 * [ ] Render a groups detail view (_/groups/detail_) correctly and implement editing you current row.
 * [ ] Implement sockets on (_/groups/join_ & _/groups/detail_).

@@ -1,3 +1,4 @@
+require('dotenv').config()
 import fetch from 'node-fetch'
 import Poll from 'async-polling'
 import { ShortCryptoPrice } from '../types/CryptoCompare'
@@ -11,7 +12,7 @@ export function setupPolling(full?: boolean) {
             const route = full
                 ? `pricemultifull`
                 : `pricemulti`
-            const cryptoCoins = [`BTC`, `ETH`, `XMR`, `XLM`, `LTC`, `BCH`]
+            const cryptoCoins = [ `BTC`, `ETH`, `XMR`, `XLM`, `LTC`, `BCH` ]
             const fsyms = `fsyms=${cryptoCoins.join(',')}`
             const response = await fetch(`${urlBase}/data/${route}?${fsyms}&tsyms=USD,EUR&api_key=${process.env.CRYPTO_COMPARE_KEY}`)
             const data = await response.json()

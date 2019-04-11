@@ -3,13 +3,13 @@
 .Input {
     -webkit-appearance: none;
     appearance: none;
-    min-width: 30em;
+    width: 30em;
     padding: 1em 2em;
     border: 1px solid $color-black;
     background-color: $color-white;
     border-radius: 2px;
 
     &--small {
-        min-width: 5em;
+        width: 5em;
     }
 }

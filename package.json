@@ -14,6 +14,7 @@
         "prebuild-client": "yarn minify-css",
         "start-server": "yarn prebuild-client && concurrently \"gulp watchClient\" \"yarn watch-client\" \"yarn watch-server\" \"yarn open-chrome\" --raw",
         "start": "node server/dist/index.js",
+        "lint": "tslint -p . -c tslint.json \"**/*.ts\" \"**/*.tsx\"",
         "watch-client": "cd ./client && yarn start-client",
         "watch-server": "ts-node-dev --respawn --transpileOnly ./server/src/index.ts"
     },

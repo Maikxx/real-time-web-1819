@@ -41,6 +41,11 @@
                                     <option value="" disabled selected>
                                         Select a currency
                                     </option>
+                                    <% cryptoCurrencies.forEach(cryptoCurrency => { %>
+                                        <option value="<%= cryptoCurrency._id %>">
+                                            <%= cryptoCurrency.name %>
+                                        </option>
+                                    <% }) %>
                                 </select>
                             </div>
                         </div>
