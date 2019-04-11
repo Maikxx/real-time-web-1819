@@ -36,4 +36,8 @@
             background-color: darken($color-brand, 5%);
         }
     }
+
+    &--small {
+        padding: 1.5em 3em;
+    }
 }

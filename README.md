@@ -50,10 +50,11 @@ I think that I can make something work with this API by polling a few times a se
 
 ## Todo
 
-* Implement client-side rendering of the join groups page.
-* Implement joining groups.
-* Implemnent login and signup.
-* Get all the available cryptocurrencies from the API to list on the create a group page.
+* [ ] Implemnent login and signup (_/login_ & _/signup_).
+* [ ] Implement client-side rendering of the join groups page (_/groups/join_).
+* [ ] Implement joining groups (_/groups/join_).
+* [ ] Get all the available cryptocurrencies from the API to list on the create a group page (_/groups/create_).
+* [ ] Render all groups server-side in which the current user is present (_/groups/list_).
 
 ## License
 
