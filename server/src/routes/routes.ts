@@ -125,10 +125,6 @@ export async function postSignUpRoute(request: express.Request, response: expres
 }
 
 export function postLoginRoute(request: express.Request, response: express.Response) {
-    if (request.session) {
-        request.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000
-    }
-
     response.redirect('/dashboard')
 }
 

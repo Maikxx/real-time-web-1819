@@ -26,7 +26,14 @@ export async function setupDatabase() {
 
     try {
         await database.query(
-            `CREATE TABLE IF NOT EXISTS users
+            `
+            CREATE TABLE IF NOT EXISTS session (
+                "sid" varchar NOT NULL COLLATE "default" PRIMARY KEY,
+                "sess" json NOT NULL,
+                "expire" timestamp(6) NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS users
             (
                 _id SERIAL PRIMARY KEY,
                 email TEXT NOT NULL UNIQUE,

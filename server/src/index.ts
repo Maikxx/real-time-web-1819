@@ -8,6 +8,9 @@ import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import passport from 'passport'
 import expressSession from 'express-session'
+import pgConnect from 'connect-pg-simple'
+
+const pgSession = pgConnect(expressSession)
 
 import { setupDatabase } from './database/setupDatabase'
 import { setupSockets } from './www/sockets'
@@ -34,6 +37,22 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
         throw new Error('You don\'t seem to have passed the session secret key correctly.')
     }
 
+    const BASE_SESSION_VARIABLES = {
+        secret: EXPRESS_SESSION_SECRET,
+        resave: false,
+        saveUninitialized: true,
+        cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 },
+    }
+
+    const SESSION_VARIABLES = process.env.NODE_ENV === 'production'
+        ? {
+            ...BASE_SESSION_VARIABLES,
+            store: new pgSession({
+                conString: process.env.DATABASE_URL,
+            }),
+        }
+        : BASE_SESSION_VARIABLES
+
     const app = express()
     const server = new http.Server(app)
 
@@ -45,7 +64,7 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
     app.use(compression())
     app.use(cookieParser())
     app.use(bodyParser.urlencoded({ extended: true }))
-    app.use(expressSession({ secret: EXPRESS_SESSION_SECRET, resave: false, saveUninitialized: true }))
+    app.use(expressSession(SESSION_VARIABLES))
     app.use(passport.initialize())
     app.use(passport.session())
     app.use(express.static(path.join(__dirname, '../public')))
