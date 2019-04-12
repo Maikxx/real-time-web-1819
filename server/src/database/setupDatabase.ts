@@ -33,6 +33,8 @@ export async function setupDatabase() {
                 "expire" timestamp(6) NOT NULL
             );
 
+            ${alterOwnerIfNotProduction('session')}
+
             CREATE TABLE IF NOT EXISTS users
             (
                 _id SERIAL PRIMARY KEY,
@@ -43,6 +45,8 @@ export async function setupDatabase() {
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
 
+            ${alterOwnerIfNotProduction('users')}
+
             CREATE TABLE IF NOT EXISTS crypto_currencies
             (
                 _id SERIAL PRIMARY KEY,
@@ -50,6 +54,8 @@ export async function setupDatabase() {
                 symbol TEXT NOT NULL,
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
+
+            ${alterOwnerIfNotProduction('crypto_currencies')}
 
             CREATE TABLE IF NOT EXISTS group_participants
             (
@@ -60,6 +66,8 @@ export async function setupDatabase() {
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
 
+            ${alterOwnerIfNotProduction('group_participants')}
+
             CREATE TABLE IF NOT EXISTS groups
             (
                 _id SERIAL PRIMARY KEY,
@@ -68,6 +76,8 @@ export async function setupDatabase() {
                 group_participants INTEGER[],
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
+
+            ${alterOwnerIfNotProduction('groups')}
             `
         )
     } catch (error) {
@@ -75,4 +85,12 @@ export async function setupDatabase() {
         console.error(error.message)
         throw new Error(error.message)
     }
+}
+
+function alterOwnerIfNotProduction(table: string) {
+    const environmentIsProduction = process.env.NODE_ENV === 'production'
+
+    return environmentIsProduction
+        ? ''
+        : `ALTER TABLE ${table} OWNER TO admin;`
 }
