@@ -35,7 +35,9 @@ export function getDashboardRoute(request: express.Request, response: express.Re
         const user: User = request.user && request.user[0]
 
         if (!user) {
-            throw new Error('User not found!')
+            console.error('User not found when trying to access the dashboard route.')
+            request.logout()
+            return response.redirect('/login')
         }
 
         response.status(200).render('view/dashboard', {
@@ -50,15 +52,6 @@ export function getDashboardRoute(request: express.Request, response: express.Re
 export function getGroupListRoute(request: express.Request, response: express.Response) {
     if (request.isAuthenticated()) {
         response.status(200).render('view/groups/list')
-    } else {
-        console.error('It looks like you are not logged in!')
-        response.status(403).redirect('/login')
-    }
-}
-
-export function getGroupJoinRoute(request: express.Request, response: express.Response) {
-    if (request.isAuthenticated()) {
-        response.status(200).render('view/groups/join')
     } else {
         console.error('It looks like you are not logged in!')
         response.status(403).redirect('/login')

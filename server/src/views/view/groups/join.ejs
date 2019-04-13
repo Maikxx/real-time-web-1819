@@ -20,7 +20,11 @@
                                     <option value="" disabled selected>
                                         Select a group
                                     </option>
-                                    <option value="test">Test group</option>
+                                    <% groups.forEach(group => { %>
+                                        <option value="<%= group._id %>">
+                                            <%= group.name %>
+                                        </option>
+                                    <% }) %>
                                 </select>
                             </div>
                         </label>

@@ -19,7 +19,6 @@ import {
     getLoginRoute,
     getSignUpRoute,
     getDashboardRoute,
-    getGroupJoinRoute,
     getGroupCreateRoute,
     getGroupListRoute,
     getGroupDetailRoute,
@@ -29,6 +28,8 @@ import {
 } from './routes/routes'
 import { postCreateGroupRoute } from './routes/post/createGroupRoute'
 import { setupAuth } from './auth/setupAuth'
+import { postJoinGroupRoute } from './routes/post/joinGroupRoute'
+import { getGroupJoinRoute } from './routes/get/groupJoinRoute'
 
 const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
 
@@ -89,6 +90,7 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
     }), postLoginRoute)
     app.post('/logout', postLogOutRoute)
 
+    app.post('/groups/join', postJoinGroupRoute)
     app.post('/groups/create', postCreateGroupRoute)
 
     server.listen(({ port: process.env.PORT || 3000 }), () => {
