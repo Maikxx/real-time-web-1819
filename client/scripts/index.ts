@@ -3,7 +3,7 @@ import { ShortCryptoPrice } from './types/CryptoCompare'
 
 const socket = io()
 
-socket.on('new-data-gathered', ({BCH, BTC, ETH, LTC, XLM, XMR}: ShortCryptoPrice) => {
+socket.on('new-data-gathered', ({ BCH, BTC, ETH, LTC, XLM, XMR }: ShortCryptoPrice) => {
     const dataTextContainer: HTMLElement | null = document.querySelector('#crypto-data')
     const dataChartContainer: HTMLElement | null = document.querySelector('#chart')
     const totalAmountOfMoney = BCH.EUR + BTC.EUR + ETH.EUR + LTC.EUR + XLM.EUR + XMR.EUR

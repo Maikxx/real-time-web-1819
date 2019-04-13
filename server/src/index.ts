@@ -30,6 +30,7 @@ import { postCreateGroupRoute } from './routes/post/createGroupRoute'
 import { setupAuth } from './auth/setupAuth'
 import { postJoinGroupRoute } from './routes/post/joinGroupRoute'
 import { getGroupJoinRoute } from './routes/get/groupJoinRoute'
+import { getGroupDataRoute } from './routes/api/getGroupDataRoute'
 
 const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
 
@@ -81,6 +82,8 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
     app.get('/groups/create', getGroupCreateRoute)
     app.get('/groups/list', getGroupListRoute)
     app.get('/groups/:id', getGroupDetailRoute)
+
+    app.get('/api/groups/:id', getGroupDataRoute)
 
     app.post('/signup', postSignUpRoute)
     app.post('/login', passport.authenticate('local', {

@@ -9,7 +9,7 @@
             <% include ../../partials/pageHeader %>
             <section class="CenterView">
                 <form action="#" class="Form">
-                    <fieldset>
+                    <fieldset class="Form__root">
                         <legend class="PageSubTitle">Join a group</legend>
                         <label class="Field">
                             <span class="Field__title">
@@ -29,26 +29,7 @@
                             </div>
                         </label>
 
-                        <!-- This will need to be rendered from the client -->
-                        <!-- <div class="Field">
-                            <span class="Field__title">
-                                Group currency
-                            </span>
-                            <div class="Field__content">
-                                <span>BTC</span>
-                            </div>
-                        </div>
-
-                        <div class="Field">
-                            <span class="Field__title">
-                                Users in this group
-                            </span>
-                            <div class="Field__content">
-                                <ul class="Row Row--wrap">
-                                    This is dynamically rendered on the client
-                                </ul>
-                            </div>
-                        </div> -->
+                        <div class="JS_DYNAMIC_HTML Field"></div>
 
                         <button type="submit" class="Button Button--action Form__submit-button">
                             Join
@@ -57,5 +38,6 @@
                 </form>
             </section>
         </main>
+        <script src="../../../../scripts/groups/join.js"></script>
     </body>
 </html>
