@@ -38,20 +38,7 @@ export async function postCreateGroupRoute(request: express.Request, response: e
                 )
 
                 if (groupParticipantRows && groupParticipantRows.length > 0) {
-                    const groupParticipant = groupParticipantRows[0]
-                    const { rows: updatedGroupRows } = await database.query(
-                        `UPDATE groups SET group_participants = $1 WHERE _id = $2 RETURNING _id;`,
-                        [ `{${groupParticipant._id}}`, group._id ]
-                    )
-
-                    if (updatedGroupRows && updatedGroupRows.length > 0) {
-                        const updatedGroup: Group = updatedGroupRows[0]
-
-                        response.status(200).redirect(`/groups/${updatedGroup._id}`)
-                    } else {
-                        console.error('Oops, for some reason we could not find the group you just updated!')
-                        response.status(500).redirect('/groups/create')
-                    }
+                    response.status(200).redirect(`/groups/${group._id}`)
                 } else {
                     console.error('Oops, for some reason we could not find the group participant that you just made!')
                     response.status(500).redirect('/groups/create')

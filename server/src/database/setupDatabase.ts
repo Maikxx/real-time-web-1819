@@ -73,7 +73,6 @@ export async function setupDatabase() {
                 _id SERIAL PRIMARY KEY,
                 name TEXT NOT NULL UNIQUE,
                 crypto_currency INTEGER NOT NULL,
-                group_participants INTEGER[],
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
 

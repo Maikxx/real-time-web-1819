@@ -16,8 +16,9 @@ export async function getGroupJoinRoute(request: express.Request, response: expr
 
         const { rows: groups } = await database.query(
             `SELECT *
-            FROM groups LEFT JOIN group_participants
-            ON (groups._id = group_participants.group_id)
+            FROM groups
+            LEFT JOIN group_participants
+                ON (groups._id = group_participants.group_id)
             WHERE group_participants.user_id != ANY($1::INTEGER[])
             ORDER BY name ASC;
             `,
