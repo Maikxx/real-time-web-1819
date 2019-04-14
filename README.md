@@ -62,7 +62,7 @@ I think that I can make something work with this API by polling a few times a se
 ## Issues
 
 * [ ] Render a groups detail view (_/groups/detail_) correctly and implement editing you current row (**HIGH PRIO**).
-* [ ] Implement sockets on (_/groups/join_ & _/groups/detail_) (**MEDIUM PRIO**).
+* [ ] Implement sockets on (_/groups/join_ & _/groups/detail_) (**HIGH PRIO**).
 * [ ] Add input validation and error feedback (**LOW PRIO**).
 * [ ] Render client-side data without innerHTML (**VERY LOW PRIO**).
 * [ ] Refactor database queries to be more concise (use nested joins) (**VERY LOW PRIO**).
