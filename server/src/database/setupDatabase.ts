@@ -62,7 +62,7 @@ export async function setupDatabase() {
                 _id SERIAL PRIMARY KEY,
                 user_id INTEGER NOT NULL,
                 group_id INTEGER NOT NULL,
-                score INTEGER,
+                score INTEGER DEFAULT 0,
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
 

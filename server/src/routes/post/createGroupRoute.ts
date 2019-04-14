@@ -17,7 +17,7 @@ export async function postCreateGroupRoute(request: express.Request, response: e
                 || isNaN(Number(currency))
             ) {
                 console.error('Oops, it looks like that you passed wrong data to the server...')
-                return response.status(409).redirect('/groups/create')
+                return response.status(409).redirect('/groups/create?error=validation')
             }
 
             if (!user) {
@@ -49,7 +49,7 @@ export async function postCreateGroupRoute(request: express.Request, response: e
                 response.status(500).redirect('/groups/create?error=internal')
             }
         } catch (error) {
-            console.error(error)
+            console.error(error.message)
             response.status(500).redirect('/groups/create?error=internal')
         }
     } else {

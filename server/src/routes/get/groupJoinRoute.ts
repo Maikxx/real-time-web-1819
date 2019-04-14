@@ -15,21 +15,45 @@ export async function getGroupJoinRoute(request: express.Request, response: expr
         const { _id: userId } = user
 
         try {
-            const { rows: groups } = await database.query(
-                `SELECT *
-                FROM groups
-                LEFT JOIN group_participants
-                    ON (groups._id = group_participants.group_id)
-                WHERE group_participants.user_id != ANY($1::INTEGER[])
-                ORDER BY name ASC;
-                `,
-                [`{${userId}}`]
+            const { rows: groupParticipants } = await database.query(
+                `SELECT
+                    user_id,
+                    group_id
+                FROM group_participants;`
             )
 
-            response.status(200).render('view/groups/join', {
-                groups,
-                error: null,
-            })
+            if (groupParticipants && groupParticipants.length > 0) {
+                const notAllowedGroups = groupParticipants
+                    .filter(groupParticipant => groupParticipant.user_id === userId)
+                    .map(groupParticipant => groupParticipant.group_id)
+
+                const { rows: groups } = await database.query(
+                    `SELECT
+                        _id,
+                        name,
+                        crypto_currency
+                    FROM groups
+                    ${notAllowedGroups && notAllowedGroups.length > 0
+                        ? 'WHERE _id != ANY($1::INTEGER[])'
+                        : ''
+                    }
+                    ORDER BY name ASC;`,
+                    notAllowedGroups && notAllowedGroups.length > 0
+                        ? [`{${notAllowedGroups.join(',')}}`]
+                        : []
+                )
+
+                response.status(200).render('view/groups/join', {
+                    groups,
+                    error: null,
+                })
+            } else {
+                console.error('There are not groups that you can join!')
+                response.status(409).render('view/groups/join', {
+                    groups: [],
+                    error: 'There could be no groups found for you to join.',
+                })
+            }
         } catch (error) {
             console.error(error.message)
             response.status(500).render('view/groups/join', {
