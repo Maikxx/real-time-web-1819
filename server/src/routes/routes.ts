@@ -49,23 +49,6 @@ export function getDashboardRoute(request: express.Request, response: express.Re
     }
 }
 
-interface GroupDetailRouteParams {
-    id: string
-}
-
-export function getGroupDetailRoute(request: express.Request, response: express.Response) {
-    const { id } = request.params as GroupDetailRouteParams
-
-    if (request.isAuthenticated()) {
-        response.status(200).render('view/groups/detail', {
-            id,
-        })
-    } else {
-        console.error('It looks like you are not logged in!')
-        response.status(403).redirect('/login?error=authentication')
-    }
-}
-
 export async function getGroupCreateRoute(request: express.Request, response: express.Response) {
     if (request.isAuthenticated()) {
         try {

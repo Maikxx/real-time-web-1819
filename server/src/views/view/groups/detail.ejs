@@ -26,37 +26,53 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                Piet Willemse
-                            </td>
-                            <td>
-                                High
-                            </td>
-                            <td>
-                                40
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Jan Smit
-                            </td>
-                            <td>
-                                <form action="#" class="Form">
-                                    <select name="myBet" class="Input Input--small Form__input">
-                                        <option value="high" selected>
-                                            High
-                                        </option>
-                                        <option value="low">
-                                            Low
-                                        </option>
-                                    </select>
-                                </form>
-                            </td>
-                            <td>
-                                30
-                            </td>
-                        </tr>
+                        <% groupParticipants.forEach(participant => { %>
+                            <tr>
+                                <td>
+                                    <%= participant.username %>
+                                </td>
+                                <td>
+                                    <% if (participant.user_id === currentUserId) { %>
+                                        <form action="#" class="Form">
+                                            <select name="myBet" class="Input Input--small Form__input">
+                                                <% if (participant.bet !== 'HIGH' && participant.bet !== 'LOW') { %>
+                                                    <option value="" disabled selected>
+                                                        Select a bet
+                                                    </option>
+                                                <% } else { %>
+                                                    <option value="" disabled>
+                                                        Select a bet
+                                                    </option>
+                                                <% } %>
+                                                <% if (participant.bet === 'HIGH') { %>
+                                                    <option value="HIGH" selected>
+                                                        High
+                                                    </option>
+                                                <% } else { %>
+                                                    <option value="HIGH">
+                                                        High
+                                                    </option>
+                                                <% } %>
+                                                <% if (participant.bet === 'LOW') { %>
+                                                    <option value="LOW" selected>
+                                                        Low
+                                                    </option>
+                                                <% } else { %>
+                                                    <option value="LOW">
+                                                        Low
+                                                    </option>
+                                                <% } %>
+                                            </select>
+                                        </form>
+                                    <% } else { %>
+                                        <%= participant.bet %>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <%= participant.score %>
+                                </td>
+                            </tr>
+                        <% }) %>
                     </tbody>
                 </table>
             </section>

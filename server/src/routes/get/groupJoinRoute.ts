@@ -48,7 +48,7 @@ export async function getGroupJoinRoute(request: express.Request, response: expr
                     error: null,
                 })
             } else {
-                console.error('There are not groups that you can join!')
+                console.error('There are no groups that you can join!')
                 response.status(409).render('view/groups/join', {
                     groups: [],
                     error: 'There could be no groups found for you to join.',

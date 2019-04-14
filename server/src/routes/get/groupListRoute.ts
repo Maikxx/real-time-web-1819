@@ -37,7 +37,7 @@ export async function getGroupListRoute(request: express.Request, response: expr
                 error: null,
             })
         } else {
-            console.error('There are not groups that you have joined!')
+            console.error('There are no groups that you have joined!')
             response.status(409).render('view/groups/list', {
                 groups: [],
                 error: 'There are no groups found, which you have joined.',
