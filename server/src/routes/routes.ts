@@ -45,7 +45,7 @@ export function getDashboardRoute(request: express.Request, response: express.Re
         })
     } else {
         console.error('It looks like you are not logged in!')
-        response.status(403).redirect('/login')
+        response.status(403).redirect('/login?error=authentication')
     }
 }
 
@@ -54,7 +54,7 @@ export function getGroupListRoute(request: express.Request, response: express.Re
         response.status(200).render('view/groups/list')
     } else {
         console.error('It looks like you are not logged in!')
-        response.status(403).redirect('/login')
+        response.status(403).redirect('/login?error=authentication')
     }
 }
 
@@ -71,7 +71,7 @@ export function getGroupDetailRoute(request: express.Request, response: express.
         })
     } else {
         console.error('It looks like you are not logged in!')
-        response.status(403).redirect('/login')
+        response.status(403).redirect('/login?error=authentication')
     }
 }
 
@@ -85,11 +85,11 @@ export async function getGroupCreateRoute(request: express.Request, response: ex
             })
         } catch (error) {
             console.error(error.message)
-            response.status(500).redirect('/')
+            response.status(500).redirect('/?error=internal')
         }
     } else {
         console.error('It looks like you are not logged in!')
-        response.status(403).redirect('/login')
+        response.status(403).redirect('/login?error=authentication')
     }
 }
 
@@ -108,12 +108,12 @@ export async function postSignUpRoute(request: express.Request, response: expres
             console.error('This user is already registered')
             response.redirect('/signup')
         } else {
-            database.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3);', [ name, email, password ])
+            await database.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3);', [ name, email, password ])
             response.redirect('/login')
         }
     } catch (error) {
         console.error(error.message)
-        response.redirect('/')
+        response.redirect('/?error=internal')
     }
 }
 

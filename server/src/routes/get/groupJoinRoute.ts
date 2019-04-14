@@ -9,27 +9,36 @@ export async function getGroupJoinRoute(request: express.Request, response: expr
         if (!user) {
             console.error('User not found when trying to access the join group route.')
             request.logout()
-            return response.redirect('/login')
+            return response.redirect('/login?error=authentication')
         }
 
         const { _id: userId } = user
 
-        const { rows: groups } = await database.query(
-            `SELECT *
-            FROM groups
-            LEFT JOIN group_participants
-                ON (groups._id = group_participants.group_id)
-            WHERE group_participants.user_id != ANY($1::INTEGER[])
-            ORDER BY name ASC;
-            `,
-            [`{${userId}}`]
-        )
+        try {
+            const { rows: groups } = await database.query(
+                `SELECT *
+                FROM groups
+                LEFT JOIN group_participants
+                    ON (groups._id = group_participants.group_id)
+                WHERE group_participants.user_id != ANY($1::INTEGER[])
+                ORDER BY name ASC;
+                `,
+                [`{${userId}}`]
+            )
 
-        response.status(200).render('view/groups/join', {
-            groups,
-        })
+            response.status(200).render('view/groups/join', {
+                groups,
+                error: null,
+            })
+        } catch (error) {
+            console.error(error.message)
+            response.status(500).render('view/groups/join', {
+                groups: [],
+                error: 'Internal server error',
+            })
+        }
     } else {
         console.error('It looks like you are not logged in!')
-        response.status(403).redirect('/login')
+        response.status(403).redirect('/login?error=authentication')
     }
 }

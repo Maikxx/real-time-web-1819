@@ -22,7 +22,8 @@ export async function postCreateGroupRoute(request: express.Request, response: e
 
             if (!user) {
                 console.error('It looks like you are not logged in!')
-                response.status(403).redirect('/login')
+                request.logout()
+                response.status(403).redirect('/login?error=authentication')
             }
 
             const { rows: groupRows } = await database.query(
@@ -41,18 +42,18 @@ export async function postCreateGroupRoute(request: express.Request, response: e
                     response.status(200).redirect(`/groups/${group._id}`)
                 } else {
                     console.error('Oops, for some reason we could not find the group participant that you just made!')
-                    response.status(500).redirect('/groups/create')
+                    response.status(500).redirect('/groups/create?error=internal')
                 }
             } else {
                 console.error('Oops, for some reason we could not find the group that you just made!')
-                response.status(500).redirect('/groups/create')
+                response.status(500).redirect('/groups/create?error=internal')
             }
         } catch (error) {
             console.error(error)
-            response.status(500).redirect('/groups/create')
+            response.status(500).redirect('/groups/create?error=internal')
         }
     } else {
         console.error('It looks like you are not logged in!')
-        response.status(403).redirect('/login')
+        response.status(403).redirect('/login?error=authentication')
     }
 }
