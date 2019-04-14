@@ -20,7 +20,6 @@ import {
     getSignUpRoute,
     getDashboardRoute,
     getGroupCreateRoute,
-    getGroupListRoute,
     getGroupDetailRoute,
     postSignUpRoute,
     postLoginRoute,
@@ -31,6 +30,7 @@ import { setupAuth } from './auth/setupAuth'
 import { postJoinGroupRoute } from './routes/post/joinGroupRoute'
 import { getGroupJoinRoute } from './routes/get/groupJoinRoute'
 import { getGroupDataRoute } from './routes/api/getGroupDataRoute'
+import { getGroupListRoute } from './routes/get/groupListRoute'
 
 const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
 

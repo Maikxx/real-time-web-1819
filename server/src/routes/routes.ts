@@ -49,15 +49,6 @@ export function getDashboardRoute(request: express.Request, response: express.Re
     }
 }
 
-export function getGroupListRoute(request: express.Request, response: express.Response) {
-    if (request.isAuthenticated()) {
-        response.status(200).render('view/groups/list')
-    } else {
-        console.error('It looks like you are not logged in!')
-        response.status(403).redirect('/login?error=authentication')
-    }
-}
-
 interface GroupDetailRouteParams {
     id: string
 }
