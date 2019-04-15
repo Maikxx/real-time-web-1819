@@ -11,27 +11,27 @@
                 <h2 class="PageSubTitle">
                     Group name (CryptoCurrency)
                 </h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>
+                <table class="Table">
+                    <thead class="Table__head">
+                        <tr class="Table__row">
+                            <th class="Table__heading">
                                 Participant name
                             </th>
-                            <th>
+                            <th class="Table__heading">
                                 Current bet
                             </th>
-                            <th>
+                            <th class="Table__heading">
                                 Amount of points
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="Table__body">
                         <% groupParticipants.forEach(participant => { %>
                             <tr>
-                                <td>
+                                <td class="Table__cell">
                                     <%= participant.username %>
                                 </td>
-                                <td>
+                                <td class="Table__cell">
                                     <% if (participant.user_id === currentUserId) { %>
                                         <form action="#" class="Form">
                                             <select name="myBet" class="Input Input--small Form__input">
@@ -68,7 +68,7 @@
                                         <%= participant.bet %>
                                     <% } %>
                                 </td>
-                                <td>
+                                <td class="Table__cell">
                                     <%= participant.score %>
                                 </td>
                             </tr>

@@ -13,6 +13,7 @@
     font-size: 1em;
 
     &--small {
-        width: 5em;
+        width: 10em;
+        min-width: initial;
     }
 }
