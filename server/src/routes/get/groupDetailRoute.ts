@@ -23,9 +23,12 @@ export async function getGroupDetailRoute(request: express.Request, response: ex
             try {
                 const { rows: groups } = await database.query(
                     `SELECT
-                        name
+                        groups.name,
+                        crypto_currencies.name AS crypto_currency
                     FROM groups
-                    WHERE _id = $1;`,
+                    LEFT JOIN crypto_currencies
+                        ON (groups.crypto_currency = crypto_currencies._id)
+                    WHERE groups._id = $1;`,
                     [groupId]
                 )
 
@@ -48,6 +51,7 @@ export async function getGroupDetailRoute(request: express.Request, response: ex
 
                     response.status(200).render('view/groups/detail', {
                         groupName: group.name,
+                        cryptoCurrency: group.crypto_currency,
                         groupParticipants,
                         currentUserId: user._id,
                     })
