@@ -34,7 +34,7 @@ export async function getGroupJoinRoute(request: express.Request, response: expr
                         crypto_currency
                     FROM groups
                     ${notAllowedGroups && notAllowedGroups.length > 0
-                        ? 'WHERE _id != ANY($1::INTEGER[])'
+                        ? 'WHERE _id != ALL($1::INTEGER[])'
                         : ''
                     }
                     ORDER BY name ASC;`,
