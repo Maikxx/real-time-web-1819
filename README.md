@@ -50,6 +50,7 @@ If I somehow have time to spare, I want to take up these points:
 The API that I am going to use for this project is [CryptoCompare](https://www.cryptocompare.com/). This is due to their seamingly easy API and pretty good limits.
 
 The limits for this API are as follows:
+* Calls / month: 150,000
 * Calls / day: 50,000
 * Calls / hour: 25,000
 * Calls / minute: 2,500
