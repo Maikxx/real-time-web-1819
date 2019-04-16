@@ -44,17 +44,9 @@ function onSocketConnection(sockets: SocketIO.Server) {
 
                     socketNameSpace.on('connection', socket => {
                         if (routeName === 'groups/detail') {
-                            const nameSpaceGroupId = Number(nameSpace[nameSpace.lastIndexOf('/') + 1])
-
-                            socket.on('bet-changed-on-client', (data: BetChangeClientData) => {
-                                if (data.groupId === nameSpaceGroupId) {
-                                    socketNameSpace.emit('bet-change-validated-on-server', data)
-                                }
-                            })
+                            onGroupDetailConnection(socket, socketNameSpace, nameSpace)
                         } else if (routeName === 'join') {
-                            groupCreationEmitter.on('group-created', (createdGroup: Group) => {
-                                socketNameSpace.emit('new-group-added', createdGroup)
-                            })
+                            onJoinConnection(socketNameSpace)
                         }
                     })
 
@@ -63,8 +55,24 @@ function onSocketConnection(sockets: SocketIO.Server) {
             }
         }
 
-        console.info('A user connected')
+        console.info('A user connected!')
 
         // poll.on('result', onPollResult(socket))
     }
+}
+
+function onGroupDetailConnection(socket: SocketIO.Socket, socketNameSpace: SocketIO.Namespace, nameSpace: string) {
+    const nameSpaceGroupId = Number(nameSpace[nameSpace.lastIndexOf('/') + 1])
+
+    socket.on('bet-changed-on-client', (data: BetChangeClientData) => {
+        if (data.groupId === nameSpaceGroupId) {
+            socketNameSpace.emit('bet-change-validated-on-server', data)
+        }
+    })
+}
+
+function onJoinConnection(socketNameSpace: SocketIO.Namespace) {
+    groupCreationEmitter.on('group-created', (createdGroup: Group) => {
+        socketNameSpace.emit('new-group-added', createdGroup)
+    })
 }
