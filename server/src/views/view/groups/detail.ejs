@@ -18,16 +18,22 @@
                                 Participant name
                             </th>
                             <th class="Table__heading">
-                                Current bet
+                                Bet
+                            </th>
+                            <th class="Table__heading">
+                                Effort
                             </th>
                             <th class="Table__heading">
                                 Amount of points
+                            </th>
+                            <th class="Table__heading">
+                                Hypothetical gain/loss
                             </th>
                         </tr>
                     </thead>
                     <tbody class="Table__body">
                         <% groupParticipants.forEach(participant => { %>
-                            <tr>
+                            <tr class="Table__row">
                                 <td class="Table__cell">
                                     <%= participant.username %>
                                 </td>
@@ -38,14 +44,14 @@
                                             class="Form"
                                             data-participant-id="<%= participant.participant_id %>"
                                         >
-                                            <select name="myBet" class="Input Input--small Form__input">
+                                            <select name="myBet" class="Input Input--small">
                                                 <% if (participant.bet !== 'HIGH' && participant.bet !== 'LOW') { %>
                                                     <option value="" disabled selected>
-                                                        Select a bet
+                                                        Select
                                                     </option>
                                                 <% } else { %>
                                                     <option value="" disabled>
-                                                        Select a bet
+                                                        Select
                                                     </option>
                                                 <% } %>
                                                 <% if (participant.bet === 'HIGH') { %>
@@ -73,7 +79,28 @@
                                     <% } %>
                                 </td>
                                 <td class="Table__cell">
+                                    <% if (participant.user_id === currentUserId) { %>
+                                        <form
+                                            action="groups/<%= groupId %>/change-effort/<%= participant.participant_id %>"
+                                            class="Form"
+                                            data-participant-id="<%= participant.participant_id %>"
+                                        >
+                                            <input
+                                                type="number"
+                                                min="1"
+                                                max="1000"
+                                                step="1"
+                                                class="Input Input--small"
+                                                placeholder="€100"
+                                            >
+                                        </form>
+                                    <% } %>
+                                </td>
+                                <td class="Table__cell">
                                     <%= participant.score %>
+                                </td>
+                                <td class="Table__cell">
+                                    <%= participant.hypothetical_gain %>
                                 </td>
                             </tr>
                         <% }) %>

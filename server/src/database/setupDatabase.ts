@@ -63,6 +63,8 @@ export async function setupDatabase() {
                 user_id INTEGER NOT NULL,
                 group_id INTEGER NOT NULL,
                 bet TEXT,
+                effort INTEGER DEFAULT 0,
+                hypothetical_gain INTEGER DEFAULT 0,
                 score INTEGER DEFAULT 0,
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );

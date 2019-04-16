@@ -1,29 +1,22 @@
 @import '../variables/colors.scss';
 
 .Table {
-    table-layout: fixed;
+    table-layout: auto;
     width: 90vw;
     border-collapse: collapse;
 
-    &__head .Table__heading:nth-of-type(1),
-    &__body .Table__cell:nth-of-type(1) {
-        width: 30%;
-    }
-
-    &__head .Table__heading:nth-of-type(2),
-    &__body .Table__cell:nth-of-type(2) {
-        width: 30%;
-    }
-
-    &__head .Table__heading:nth-of-type(3),
-    &__body .Table__cell:nth-of-type(3) {
-        width: 20%;
-    }
-
     &__cell,
     &__heading {
-        padding: 2em 1em;
+        padding: 1em .5em;
         text-align: left;
-        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__row {
+        border: 1px solid $color-black;
+    }
+
+    &__cell {
+        text-transform: capitalize;
     }
 }

@@ -40,6 +40,8 @@ export async function getGroupDetailRoute(request: express.Request, response: ex
                             group_participants._id AS participant_id,
                             group_participants.score,
                             group_participants.bet,
+                            group_participants.hypothetical_gain,
+                            group_participants.effort,
                             users.username,
                             users._id AS user_id
                         FROM group_participants
