@@ -2,6 +2,14 @@ import 'babel-polyfill'
 import SocketIO from 'socket.io-client'
 import { GroupQueryResult, Group } from '../types/Group'
 
+interface NewParticipantAddedParams {
+    participant: {
+        username: string
+        _id: number
+    }
+    groupId: number
+}
+
 (() => {
     if (SocketIO) {
         setupSockets()
@@ -63,8 +71,24 @@ import { GroupQueryResult, Group } from '../types/Group'
                         const response = await fetch(getGroupDataUrl)
                         const data: GroupQueryResult = await response.json()
 
+                        socket.emit('subscribe-to-group', {
+                            id: data.group._id,
+                        })
+
+                        socket.on('new-participant-added', (params: NewParticipantAddedParams) => {
+                            const { groupId: validationGroupId, participant } = params
+
+                            if (validationGroupId === Number(groupId)) {
+                                const userListElement = document.querySelector('#user-list')
+
+                                if (userListElement && !userListElement.innerHTML.includes(`data-user-id="${params.participant._id}"`)) {
+                                    userListElement.innerHTML += `<li data-user-id="${params.participant._id}">${participant.username}</li>`
+                                }
+                            }
+                        })
+
                         if (data && !data.error) {
-                            JS_DYNAMIC_HTML_HOOK.innerHTML = getDynamicGroupMarkup(data.group)
+                            JS_DYNAMIC_HTML_HOOK.innerHTML = getGroupDetailMarkup(data.group)
                         } else {
                             throw new Error(data.error as string)
                         }
@@ -80,7 +104,7 @@ import { GroupQueryResult, Group } from '../types/Group'
         }
     }
 
-    function getDynamicGroupMarkup(group: Group) {
+    function getGroupDetailMarkup(group: Group) {
         return `
         <div class="Field">
             <span class="Field__title">
@@ -98,7 +122,7 @@ import { GroupQueryResult, Group } from '../types/Group'
             <div class="Field__content">
                 ${group.participants && group.participants.length > 0
                     ? (
-                        `<ul class="Row Row--wrap">
+                        `<ul class="Row Row--wrap" id="user-list">
                             ${group.participants.map(participant => (
                                 `<li>${participant.username}</li>`
                             ))}

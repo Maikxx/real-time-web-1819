@@ -1,6 +1,7 @@
 import express from 'express'
 import { database } from '../../database/setupDatabase'
 import { User } from '../../types/User'
+import { groupParticipantCreationEmitter } from '../../www/events'
 
 export async function postJoinGroupRoute(request: express.Request, response: express.Response) {
     if (request.isAuthenticated()) {
@@ -23,12 +24,28 @@ export async function postJoinGroupRoute(request: express.Request, response: exp
                         group_id
                     ) VALUES (
                         $1, $2
-                    ) RETURNING group_id;`,
+                    ) RETURNING user_id;`,
                     [ user._id, id ]
                 )
 
                 if (groupParticipantRows && groupParticipantRows.length > 0) {
                     response.status(200).redirect(`/groups/${id}`)
+
+                    const { rows: groupParticipantUserRows } = await database.query(
+                        `SELECT
+                            users._id,
+                            users.username
+                        FROM group_participants
+                        LEFT JOIN users
+                            ON (group_participants.user_id = users._id)
+                        WHERE group_participants.group_id = $1 AND group_participants.user_id = $2;`,
+                        [ id, groupParticipantRows[0].user_id ]
+                    )
+
+                    if (groupParticipantUserRows && groupParticipantUserRows.length > 0) {
+                        const [newParticipant] = groupParticipantUserRows
+                        groupParticipantCreationEmitter.emit(`new-group-participant-added-to-group-${id}`, newParticipant)
+                    }
                 } else {
                     console.error('It looks like the database did not sent back any group participants!')
                     response.status(500).redirect('/groups/join?error=internal')

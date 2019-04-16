@@ -2,7 +2,7 @@ import { Server } from 'http'
 import url from 'url'
 import SocketIO from 'socket.io'
 import { BetType } from '../types/CryptoCurrency'
-import { groupCreationEmitter } from './events'
+import { groupCreationEmitter, groupParticipantCreationEmitter } from './events'
 import { Group } from '../types/Group'
 
 const socketRoutes = {
@@ -46,7 +46,7 @@ function onSocketConnection(sockets: SocketIO.Server) {
                         if (routeName === 'groups/detail') {
                             onGroupDetailConnection(socket, socketNameSpace, nameSpace)
                         } else if (routeName === 'join') {
-                            onJoinConnection(socketNameSpace)
+                            onJoinConnection(socket, socketNameSpace)
                         }
                     })
 
@@ -71,8 +71,21 @@ function onGroupDetailConnection(socket: SocketIO.Socket, socketNameSpace: Socke
     })
 }
 
-function onJoinConnection(socketNameSpace: SocketIO.Namespace) {
+function onJoinConnection(socket: SocketIO.Socket, socketNameSpace: SocketIO.Namespace) {
     groupCreationEmitter.on('group-created', (createdGroup: Group) => {
         socketNameSpace.emit('new-group-added', createdGroup)
     })
+
+    socket.on('subscribe-to-group', (group: { id: number }) => {
+        groupParticipantCreationEmitter.on(`new-group-participant-added-to-group-${group.id}`, onNewGroupParticipantAdded(socketNameSpace, group.id))
+    })
+}
+
+function onNewGroupParticipantAdded(socketNameSpace: SocketIO.Namespace, groupId: number) {
+    return function(participant: { username: string, _id: number }) {
+        socketNameSpace.emit('new-participant-added', {
+            participant,
+            groupId,
+        })
+    }
 }
