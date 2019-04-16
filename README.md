@@ -61,10 +61,11 @@ I think that I can make something work with this API by polling a few times a se
 
 ## Issues
 
-* [ ] Implement sockets on (_/groups/join_ & _/groups/detail_) (**HIGH PRIO**).
-* [ ] Add input validation and error feedback (**LOW PRIO**).
-* [ ] Render client-side data without innerHTML (**VERY LOW PRIO**).
-* [ ] Refactor database queries to be more concise (use nested joins) (**VERY LOW PRIO**).
+* [ ] Implement score incrementation (**HIGH PRIO**) **MAJOR**.
+* [ ] Implement sockets on (_/groups/join_ & _/groups/detail_) (**HIGH PRIO**) **MEDIUM**.
+* [ ] Add input validation and error feedback (**LOW PRIO**) **MEDIUM**.
+* [ ] Render client-side data without innerHTML (**VERY LOW PRIO**) **MINOR**.
+* [ ] Refactor database queries to be more concise (use nested joins) (**VERY LOW PRIO**) **MEDIUM**.
 * [X] Get all the available cryptocurrencies from the API to list on the create a group page (_/groups/create_).
 * [X] Implement client-side rendering of the join groups page (_/groups/join_).
 * [X] Implement group creation (_/groups/create_).
