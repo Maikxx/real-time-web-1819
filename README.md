@@ -63,6 +63,7 @@ I think that I can make something work with this API by polling a few times a se
 
 * [ ] Implement score incrementation (**HIGH PRIO**) **MAJOR**.
 * [ ] Implement sockets on (_/groups/join_ & _/groups/detail_) (**HIGH PRIO**) **MAJOR**.
+* [ ] Add feedback for real-time updates (**MEDIUM PRIO**) **MINOR**.
 * [ ] Add input validation and error feedback (**LOW PRIO**) **MEDIUM**.
 * [ ] Render client-side data without innerHTML (**VERY LOW PRIO**) **MINOR**.
 * [ ] Refactor database queries to be more concise (use nested joins) (**VERY LOW PRIO**) **MEDIUM**.
