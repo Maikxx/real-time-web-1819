@@ -37,6 +37,7 @@ export async function getGroupDetailRoute(request: express.Request, response: ex
 
                     const { rows: groupParticipants } = await database.query(
                         `SELECT
+                            group_participants._id AS participant_id,
                             group_participants.score,
                             group_participants.bet,
                             users.username,
@@ -50,6 +51,7 @@ export async function getGroupDetailRoute(request: express.Request, response: ex
                     )
 
                     response.status(200).render('view/groups/detail', {
+                        groupId: groupId,
                         groupName: group.name,
                         cryptoCurrency: group.crypto_currency,
                         groupParticipants,

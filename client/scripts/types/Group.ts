@@ -15,3 +15,8 @@ export interface GroupQueryResult {
     error: string | null
     group: Group
 }
+
+export interface ChangeBetData {
+    error: string | null
+    success: boolean
+}

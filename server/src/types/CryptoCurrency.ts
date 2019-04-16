@@ -4,3 +4,5 @@ export interface CryptoCurrency {
     symbol: string
     created_at: Date
 }
+
+export type BetType = 'HIGH' | 'LOW'

@@ -61,7 +61,6 @@ I think that I can make something work with this API by polling a few times a se
 
 ## Issues
 
-* [ ] Render a groups detail view (_/groups/detail_) correctly and implement editing you current row (**HIGH PRIO**).
 * [ ] Implement sockets on (_/groups/join_ & _/groups/detail_) (**HIGH PRIO**).
 * [ ] Add input validation and error feedback (**LOW PRIO**).
 * [ ] Render client-side data without innerHTML (**VERY LOW PRIO**).
@@ -71,6 +70,7 @@ I think that I can make something work with this API by polling a few times a se
 * [X] Implement group creation (_/groups/create_).
 * [X] Implement joining groups (_/groups/join_).
 * [X] Implement login and signup (_/login_ & _/signup_).
+* [X] Render a groups detail view (_/groups/detail_) correctly and implement editing you current row.
 * [X] Render all groups server-side in which the current user is present (_/groups/list_).
 
 ## Sources

@@ -32,6 +32,7 @@ import { getGroupDataRoute } from './routes/api/getGroupDataRoute'
 import { getGroupListRoute } from './routes/get/groupListRoute'
 import { getGroupDetailRoute } from './routes/get/groupDetailRoute'
 import { seedDatabase } from './database/seedDatabase'
+import { postApiGroupsChangeBetRoute } from './routes/api/postApiGroupsChangeBetRoute'
 
 const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
 
@@ -71,6 +72,7 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
     app.use(compression())
     app.use(cookieParser())
     app.use(bodyParser.urlencoded({ extended: true }))
+    app.use(bodyParser.json())
     app.use(expressSession(SESSION_VARIABLES))
     app.use(passport.initialize())
     app.use(passport.session())
@@ -94,12 +96,13 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
     app.post('/login', passport.authenticate('local', {
         successRedirect: '/dashboard',
         failureRedirect: '/login',
-        failureFlash: true,
     }), postLoginRoute)
     app.post('/logout', postLogOutRoute)
 
     app.post('/groups/join', postJoinGroupRoute)
     app.post('/groups/create', postCreateGroupRoute)
+
+    app.post('/api/groups/:groupId/change-bet/:participantId', postApiGroupsChangeBetRoute)
 
     server.listen(({ port: process.env.PORT || 3000 }), () => {
         console.info(`App is now open for action on port ${process.env.PORT || 3000}.`)

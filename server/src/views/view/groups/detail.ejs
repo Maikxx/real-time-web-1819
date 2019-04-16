@@ -33,7 +33,7 @@
                                 </td>
                                 <td class="Table__cell">
                                     <% if (participant.user_id === currentUserId) { %>
-                                        <form action="/groups/change-bet/<%= participant.user_id %>" class="Form">
+                                        <form action="groups/<%= groupId %>/change-bet/<%= participant.participant_id %>" class="Form">
                                             <select name="myBet" class="Input Input--small Form__input">
                                                 <% if (participant.bet !== 'HIGH' && participant.bet !== 'LOW') { %>
                                                     <option value="" disabled selected>
