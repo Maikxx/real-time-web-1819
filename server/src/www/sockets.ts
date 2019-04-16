@@ -1,6 +1,6 @@
 import { Server } from 'http'
 import url from 'url'
-import socket from 'socket.io'
+import SocketIO from 'socket.io'
 import { BetType } from '../types/CryptoCurrency'
 
 const socketRoutes = {
@@ -12,12 +12,12 @@ interface SocketIOQueryParams {
 }
 
 export function setupSockets(server: Server) {
-    const socketio: socket.Server = socket(server)
+    const sockets: SocketIO.Server = SocketIO(server)
     // const poll = setupPolling(false)
 
     // poll.run()
-    socketio.on('connection', onSocketConnection(socketio))
-    return socketio
+    sockets.on('connection', onSocketConnection(sockets))
+    return sockets
 }
 
 interface BetChangeClientData {
@@ -26,8 +26,8 @@ interface BetChangeClientData {
     newBet: BetType
 }
 
-function onSocketConnection(socketIo: SocketIO.Server) {
-    return function(socket: socket.Socket) {
+function onSocketConnection(sockets: SocketIO.Server) {
+    return function(socket: SocketIO.Socket) {
         const queryParams: SocketIOQueryParams = url.parse(socket.handshake.url, true).query
         const nameSpace = queryParams.ns
 
@@ -37,7 +37,7 @@ function onSocketConnection(socketIo: SocketIO.Server) {
                 const routeRegExpression = socketRoutes[routeName]
 
                 if (nameSpace.match(routeRegExpression)) {
-                    const socketNameSpace = socketIo.of(nameSpace)
+                    const socketNameSpace = sockets.of(nameSpace)
 
                     socketNameSpace.on('connection', socket => {
                         const nameSpaceGroupId = Number(nameSpace[nameSpace.lastIndexOf('/') + 1])

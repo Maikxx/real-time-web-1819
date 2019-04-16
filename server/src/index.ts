@@ -61,7 +61,7 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
     const server = new http.Server(app)
 
     await setupDatabase()
-    const socketio = setupSockets(server)
+    const sockets = setupSockets(server)
     setupAuth(passport)
 
     if (process.env.RUN_SEEDERS === 'true') {
@@ -88,7 +88,7 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
     app.get('/groups/join', getGroupJoinRoute)
     app.get('/groups/create', getGroupCreateRoute)
     app.get('/groups/list', getGroupListRoute)
-    app.get('/groups/:id', getGroupDetailRoute(socketio))
+    app.get('/groups/:id', getGroupDetailRoute(sockets))
 
     app.get('/api/groups/:id', getGroupDataRoute)
 
@@ -100,7 +100,7 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
     app.post('/logout', postLogOutRoute)
 
     app.post('/groups/join', postJoinGroupRoute)
-    app.post('/groups/create', postCreateGroupRoute)
+    app.post('/groups/create', postCreateGroupRoute(sockets))
 
     app.post('/api/groups/:groupId/change-bet/:participantId', postApiGroupsChangeBetRoute)
 

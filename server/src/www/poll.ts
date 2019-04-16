@@ -2,7 +2,7 @@ require('dotenv').config()
 import fetch from 'node-fetch'
 import Poll from 'async-polling'
 import { ShortCryptoPrice } from '../types/CryptoCompare'
-import socket from 'socket.io'
+import SocketIO from 'socket.io'
 import _ from 'lodash'
 
 export function setupPolling(full?: boolean) {
@@ -28,7 +28,7 @@ export function setupPolling(full?: boolean) {
     return poll
 }
 
-export function onPollResult(socket: socket.Socket) {
+export function onPollResult(socket: SocketIO.Socket) {
     return function(newData: ShortCryptoPrice) {
         socket.emit('new-data-gathered', newData)
     }

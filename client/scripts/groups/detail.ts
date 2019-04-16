@@ -1,9 +1,9 @@
 import 'babel-polyfill'
-import io from 'socket.io-client'
+import SocketIO from 'socket.io-client'
 import { ChangeBetData, BetType } from '../types/Group'
 
 (() => {
-    if (io) {
+    if (SocketIO) {
         if (!isNaN(getGroupIdFromWindow())) {
             setupSockets()
         } else {
@@ -14,7 +14,7 @@ import { ChangeBetData, BetType } from '../types/Group'
     }
 
     function connect(nameSpace: string) {
-        return io.connect(nameSpace, {
+        return SocketIO.connect(nameSpace, {
             query: `ns=${nameSpace}`,
         })
     }
@@ -54,9 +54,9 @@ import { ChangeBetData, BetType } from '../types/Group'
 
     function setupSockets() {
         const groupId = getGroupIdFromWindow()
-        const socketio: any = connect(`/groups/${groupId}`)
+        const sockets: any = connect(`/groups/${groupId}`)
 
-        socketio.on('connect', () => onSocketConnection(socketio))
+        sockets.on('connect', () => onSocketConnection(sockets))
     }
 
     function setupFormEventListener(socket: SocketIO.Socket) {

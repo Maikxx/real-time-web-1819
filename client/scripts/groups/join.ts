@@ -1,10 +1,10 @@
 import 'babel-polyfill'
-import io from 'socket.io-client'
+import SocketIO from 'socket.io-client'
 import { GroupQueryResult } from '../types/Group'
 
 (() => {
-    if (io) {
-        const socket: SocketIOClient.Socket = io()
+    if (SocketIO) {
+        const socket: SocketIOClient.Socket = SocketIO()
 
         socket.on('connect', () => onSocketConnection(socket))
     } else {
