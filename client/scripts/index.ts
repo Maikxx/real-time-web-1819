@@ -23,6 +23,7 @@ socket.on('new-data-gathered', ({ BCH, BTC, ETH, LTC, XLM, XMR }: ShortCryptoPri
             }
         }
 
+        // tslint:disable-next-line:ter-max-len
         dataTextContainer.innerText = `Bitcoin: €${BTC.EUR}, Etherium: €${ETH.EUR}, Bitcoin Cash: €${BCH.EUR}, Litecoin: €${LTC.EUR}, Stellar: €${XLM.EUR}, Monero: €${XMR.EUR}. Total: €${totalAmountOfMoney}`
     }
 })

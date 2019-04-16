@@ -20,3 +20,5 @@ export interface ChangeBetData {
     error: string | null
     success: boolean
 }
+
+export type BetType = 'HIGH' | 'LOW'

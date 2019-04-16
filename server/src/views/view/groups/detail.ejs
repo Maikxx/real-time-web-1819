@@ -31,9 +31,13 @@
                                 <td class="Table__cell">
                                     <%= participant.username %>
                                 </td>
-                                <td class="Table__cell">
+                                <td class="Table__cell" data-participant-id="<%= participant.participant_id %>">
                                     <% if (participant.user_id === currentUserId) { %>
-                                        <form action="groups/<%= groupId %>/change-bet/<%= participant.participant_id %>" class="Form">
+                                        <form
+                                            action="groups/<%= groupId %>/change-bet/<%= participant.participant_id %>"
+                                            class="Form"
+                                            data-participant-id="<%= participant.participant_id %>"
+                                        >
                                             <select name="myBet" class="Input Input--small Form__input">
                                                 <% if (participant.bet !== 'HIGH' && participant.bet !== 'LOW') { %>
                                                     <option value="" disabled selected>
@@ -65,7 +69,7 @@
                                             </select>
                                         </form>
                                     <% } else { %>
-                                        <%= participant.bet ? participant.bet : 'No bet placed yet' %>
+                                        <%= participant.bet ? participant.bet === 'HIGH' ? 'High' : 'Low' : 'No bet placed yet' %>
                                     <% } %>
                                 </td>
                                 <td class="Table__cell">

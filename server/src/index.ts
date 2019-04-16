@@ -61,7 +61,7 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
     const server = new http.Server(app)
 
     await setupDatabase()
-    setupSockets(server)
+    const socketio = setupSockets(server)
     setupAuth(passport)
 
     if (process.env.RUN_SEEDERS === 'true') {
@@ -88,7 +88,7 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
     app.get('/groups/join', getGroupJoinRoute)
     app.get('/groups/create', getGroupCreateRoute)
     app.get('/groups/list', getGroupListRoute)
-    app.get('/groups/:id', getGroupDetailRoute)
+    app.get('/groups/:id', getGroupDetailRoute(socketio))
 
     app.get('/api/groups/:id', getGroupDataRoute)
 
