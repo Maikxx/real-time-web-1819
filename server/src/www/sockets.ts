@@ -1,7 +1,5 @@
 import { Server } from 'http'
 import url from 'url'
-import { PollType } from '../types/Poll'
-import { setupPolling, onPollResult } from '../www/poll'
 import socket from 'socket.io'
 import { BetType } from '../types/CryptoCurrency'
 
@@ -15,10 +13,10 @@ interface SocketIOQueryParams {
 
 export function setupSockets(server: Server) {
     const socketio: socket.Server = socket(server)
-    const poll = setupPolling(false)
+    // const poll = setupPolling(false)
 
-    poll.run()
-    socketio.on('connection', onSocketConnection(poll, socketio))
+    // poll.run()
+    socketio.on('connection', onSocketConnection(socketio))
     return socketio
 }
 
@@ -28,7 +26,7 @@ interface BetChangeClientData {
     newBet: BetType
 }
 
-function onSocketConnection(poll: PollType, socketIo: SocketIO.Server) {
+function onSocketConnection(socketIo: SocketIO.Server) {
     return function(socket: socket.Socket) {
         const queryParams: SocketIOQueryParams = url.parse(socket.handshake.url, true).query
         const nameSpace = queryParams.ns
@@ -58,6 +56,6 @@ function onSocketConnection(poll: PollType, socketIo: SocketIO.Server) {
 
         console.info('A user connected')
 
-        poll.on('result', onPollResult(socket))
+        // poll.on('result', onPollResult(socket))
     }
 }
