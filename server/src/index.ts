@@ -31,6 +31,7 @@ import { getGroupJoinRoute } from './routes/get/groupJoinRoute'
 import { getGroupDataRoute } from './routes/api/getGroupDataRoute'
 import { getGroupListRoute } from './routes/get/groupListRoute'
 import { getGroupDetailRoute } from './routes/get/groupDetailRoute'
+import { seedDatabase } from './database/seedDatabase'
 
 const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
 
@@ -61,6 +62,10 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
     await setupDatabase()
     setupSockets(server)
     setupAuth(passport)
+
+    if (process.env.RUN_SEEDERS === 'true') {
+        await seedDatabase()
+    }
 
     app.use(helmet())
     app.use(compression())
