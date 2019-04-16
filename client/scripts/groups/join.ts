@@ -1,17 +1,44 @@
 import 'babel-polyfill'
 import SocketIO from 'socket.io-client'
-import { GroupQueryResult } from '../types/Group'
+import { GroupQueryResult, Group } from '../types/Group'
 
 (() => {
     if (SocketIO) {
-        const socket: SocketIOClient.Socket = SocketIO()
-
-        socket.on('connect', () => onSocketConnection(socket))
+        setupSockets()
     } else {
         throw new Error('Sockets could not be loaded for some reason!')
     }
 
+    function setupSockets() {
+        const socket: SocketIOClient.Socket = connect('/join')
+
+        socket.on('connect', () => onSocketConnection(socket))
+    }
+
+    function connect(nameSpace: string) {
+        return SocketIO.connect(nameSpace, {
+            query: `ns=${nameSpace}`,
+        })
+    }
+
     function onSocketConnection(socket: SocketIOClient.Socket) {
+        socket.on('new-group-added', onNewGroupAdded)
+        setupFormEventListener(socket)
+    }
+
+    function onNewGroupAdded({ name, _id }: Group) {
+        const groupInput = document.querySelector('select[name=groupId]')
+
+        if (groupInput) {
+            if (groupInput.innerHTML.includes(`value="${_id}"`)) {
+                return
+            }
+
+            groupInput.innerHTML += `<option value="${_id}">${name}</option>`
+        }
+    }
+
+    function setupFormEventListener(socket: SocketIOClient.Socket) {
         const groupInput: HTMLSelectElement | null = document.querySelector('[name="groupId"]')
 
         if (groupInput) {

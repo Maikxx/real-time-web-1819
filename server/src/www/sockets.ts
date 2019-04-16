@@ -2,9 +2,12 @@ import { Server } from 'http'
 import url from 'url'
 import SocketIO from 'socket.io'
 import { BetType } from '../types/CryptoCurrency'
+import { groupCreationEmitter } from './events'
+import { Group } from '../types/Group'
 
 const socketRoutes = {
-    'groups.detail': '^\\/groups\\/(\\d+)$',
+    'groups/detail': '^\\/groups\\/(\\d+)$',
+    join: '^\\/join$',
 }
 
 interface SocketIOQueryParams {
@@ -40,13 +43,19 @@ function onSocketConnection(sockets: SocketIO.Server) {
                     const socketNameSpace = sockets.of(nameSpace)
 
                     socketNameSpace.on('connection', socket => {
-                        const nameSpaceGroupId = Number(nameSpace[nameSpace.lastIndexOf('/') + 1])
+                        if (routeName === 'groups/detail') {
+                            const nameSpaceGroupId = Number(nameSpace[nameSpace.lastIndexOf('/') + 1])
 
-                        socket.on('bet-changed-on-client', (data: BetChangeClientData) => {
-                            if (data.groupId === nameSpaceGroupId) {
-                                socketNameSpace.emit('bet-change-validated-on-server', data)
-                            }
-                        })
+                            socket.on('bet-changed-on-client', (data: BetChangeClientData) => {
+                                if (data.groupId === nameSpaceGroupId) {
+                                    socketNameSpace.emit('bet-change-validated-on-server', data)
+                                }
+                            })
+                        } else if (routeName === 'join') {
+                            groupCreationEmitter.on('group-created', (createdGroup: Group) => {
+                                socketNameSpace.emit('new-group-added', createdGroup)
+                            })
+                        }
                     })
 
                     break

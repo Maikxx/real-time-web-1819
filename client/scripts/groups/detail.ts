@@ -19,15 +19,22 @@ import { ChangeBetData, BetType } from '../types/Group'
         })
     }
 
+    function onSocketConnection(socket: SocketIO.Socket) {
+        socket.on('bet-change-validated-on-server', onBetChangeValidated)
+        setupFormEventListener(socket)
+    }
+
+    function setupSockets() {
+        const groupId = getGroupIdFromWindow()
+        const sockets: any = connect(`/groups/${groupId}`)
+
+        sockets.on('connect', () => onSocketConnection(sockets))
+    }
+
     interface BetChangeClientData {
         groupId: number
         participantId: number
         newBet: BetType
-    }
-
-    function onSocketConnection(socket: SocketIO.Socket) {
-        socket.on('bet-change-validated-on-server', onBetChangeValidated)
-        setupFormEventListener(socket)
     }
 
     function onBetChangeValidated(data: BetChangeClientData) {
@@ -50,13 +57,6 @@ import { ChangeBetData, BetType } from '../types/Group'
                     : 'Low'
             }
         }
-    }
-
-    function setupSockets() {
-        const groupId = getGroupIdFromWindow()
-        const sockets: any = connect(`/groups/${groupId}`)
-
-        sockets.on('connect', () => onSocketConnection(sockets))
     }
 
     function setupFormEventListener(socket: SocketIO.Socket) {

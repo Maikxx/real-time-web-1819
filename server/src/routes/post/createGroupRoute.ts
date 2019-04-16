@@ -2,6 +2,7 @@ import express from 'express'
 import { User } from '../../types/User'
 import { CreateGroupArgs, Group } from '../../types/Group'
 import { database } from '../../database/setupDatabase'
+import { groupCreationEmitter } from '../../www/events'
 
 export async function postCreateGroupRoute(request: express.Request, response: express.Response) {
     if (request.isAuthenticated()) {
@@ -27,7 +28,7 @@ export async function postCreateGroupRoute(request: express.Request, response: e
             }
 
             const { rows: groupRows } = await database.query(
-                `INSERT INTO groups (name, crypto_currency) VALUES ($1, $2) RETURNING _id;`,
+                `INSERT INTO groups (name, crypto_currency) VALUES ($1, $2) RETURNING _id, name;`,
                 [ name, Number(currency) ]
             )
 
@@ -39,6 +40,7 @@ export async function postCreateGroupRoute(request: express.Request, response: e
                 )
 
                 if (groupParticipantRows && groupParticipantRows.length > 0) {
+                    groupCreationEmitter.emit('group-created', group)
                     response.status(200).redirect(`/groups/${group._id}`)
                 } else {
                     console.error('Oops, for some reason we could not find the group participant that you just made!')
