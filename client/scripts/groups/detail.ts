@@ -1,6 +1,6 @@
 import 'babel-polyfill'
 import SocketIO from 'socket.io-client'
-import { ChangeBetData, BetType } from '../types/Group'
+import { ChangeBetData, BetType, GroupParticipant } from '../types/Group'
 
 (() => {
     if (SocketIO) {
@@ -22,6 +22,7 @@ import { ChangeBetData, BetType } from '../types/Group'
     function onSocketConnection(socket: SocketIO.Socket) {
         socket.on('bet-change-validated-on-server', onBetChangeValidated)
         socket.on('effort-change-validated-on-server', onEffortChangeValidated)
+        socket.on('group-participants-changed', onGroupParticipantChanged)
         setupFormEventListeners(socket)
     }
 
@@ -42,6 +43,18 @@ import { ChangeBetData, BetType } from '../types/Group'
         groupId: number
         participantId: number
         effort: number
+    }
+
+    function onGroupParticipantChanged(participants: GroupParticipant[]) {
+        participants.forEach(participant => {
+            const scoreElement = document.querySelector(`td[data-participant-id="${participant._id}"].TableCell--score`)
+            const gainElement = document.querySelector(`td[data-participant-id="${participant._id}"].TableCell--hypothetical-gain`)
+
+            if (scoreElement && gainElement) {
+                scoreElement.innerHTML = String(participant.score)
+                gainElement.innerHTML = `€${participant.hypothetical_gain}`
+            }
+        })
     }
 
     function onEffortChangeValidated(data: EffortChangeClientData) {

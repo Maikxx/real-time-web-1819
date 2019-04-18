@@ -62,7 +62,7 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
     const server = new http.Server(app)
 
     await setupDatabase()
-    setupSockets(server)
+    await setupSockets(server)
     setupAuth(passport)
 
     if (process.env.RUN_SEEDERS === 'true') {

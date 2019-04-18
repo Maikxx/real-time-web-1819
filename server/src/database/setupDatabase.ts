@@ -50,7 +50,7 @@ export async function setupDatabase() {
             (
                 _id SERIAL PRIMARY KEY,
                 name TEXT NOT NULL UNIQUE,
-                value_history FLOAT[],
+                value_history FLOAT DEFAULT 0,
                 current_value FLOAT DEFAULT 0,
                 sort_order INTEGER,
                 symbol TEXT NOT NULL,

@@ -100,11 +100,11 @@
                                         <%= participant.effort > 0 ? `€${participant.effort}` : 'Effort has not been placed yet' %>
                                     <% } %>
                                 </td>
-                                <td class="Table__cell">
+                                <td class="Table__cell TableCell--score" data-participant-id="<%= participant.participant_id %>">
                                     <%= participant.score %>
                                 </td>
-                                <td class="Table__cell">
-                                    <%= participant.hypothetical_gain %>
+                                <td class="Table__cell TableCell--hypothetical-gain" data-participant-id="<%= participant.participant_id %>">
+                                    €<%= participant.hypothetical_gain %>
                                 </td>
                             </tr>
                         <% }) %>

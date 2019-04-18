@@ -2,8 +2,9 @@ import { Server } from 'http'
 import url from 'url'
 import SocketIO from 'socket.io'
 import { BetType } from '../types/CryptoCurrency'
-import { groupCreationEmitter, groupParticipantCreationEmitter } from './events'
+import { groupCreationEmitter, groupParticipantCreationEmitter, groupScoreChanged } from './events'
 import { Group } from '../types/Group'
+import { setupPolling } from './poll'
 
 const socketRoutes = {
     'groups/detail': '^\\/groups\\/(\\d+)$',
@@ -14,11 +15,14 @@ interface SocketIOQueryParams {
     ns?: string
 }
 
-export function setupSockets(server: Server) {
+export async function setupSockets(server: Server) {
     const sockets: SocketIO.Server = SocketIO(server)
-    // const poll = setupPolling(false)
+    const poll = await setupPolling(false)
 
-    // poll.run()
+    if (poll) {
+        (poll as any).run()
+    }
+
     sockets.on('connection', onSocketConnection(sockets))
     return sockets
 }
@@ -62,8 +66,6 @@ function onSocketConnection(sockets: SocketIO.Server) {
         }
 
         console.info('A user connected!')
-
-        // poll.on('result', onPollResult(socket))
     }
 }
 
@@ -74,6 +76,10 @@ function onGroupDetailConnection(socket: SocketIO.Socket, socketNameSpace: Socke
         if (data.groupId === nameSpaceGroupId) {
             socketNameSpace.emit('bet-change-validated-on-server', data)
         }
+    })
+
+    groupScoreChanged.on(`group-${nameSpaceGroupId}-changed`, data => {
+        socketNameSpace.emit('group-participants-changed', data)
     })
 
     socket.on('effort-changed-on-client', (data: EffortChangeClientData) => {

@@ -330,10 +330,9 @@ export interface FullCryptoPrice {
 }
 
 export interface ShortCryptoPriceValue {
-    USD: number
     EUR: number
 }
 
 export interface ShortCryptoPrice {
-    [name: string]: ShortCryptoPriceValue
+    EUR: number
 }
