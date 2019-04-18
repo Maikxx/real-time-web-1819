@@ -2,8 +2,6 @@
 
 [🚀 Live demo 🚀](https://rtw-3.herokuapp.com/)
 
-This app uses real-time technologies, like web sockets to enable a useful user experience.
-
 ## Table of Contents
 
 1. [Concept](#Concept)
