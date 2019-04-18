@@ -10,9 +10,10 @@ This app uses real-time technologies, like web sockets to enable a useful user e
     1. [Application flow](#Application-flow)
     2. [Bonus features](#Bonus-features)
 2. [API](#API)
-3. [Issues](#Issues)
-4. [Sources](#Sources)
-5. [License](#License)
+3. [Data life cycle](#Data-life-cycle)
+4. [Issues](#Issues)
+5. [Sources](#Sources)
+6. [License](#License)
 
 
 ## Concept
@@ -49,7 +50,8 @@ If I somehow have time to spare, I want to take up these points:
 
 The API that I am going to use for this project is [CryptoCompare](https://www.cryptocompare.com/). This is due to their seamingly easy API and pretty good limits.
 
-The limits for this API are as follows:
+### Limits
+
 * The API only allows calls to the CryptoCompare server with a maximum of 300 crypto currencies to watch.
 * Calls / month: 150,000
 * Calls / day: 50,000
@@ -60,6 +62,13 @@ The limits for this API are as follows:
 This API does not contain a websocket connection, unfortunately, but I found the APIs that do exist with a socket connection, to be very boring. The ones that I have found pretty much only include the large social platforms, like Facebook and Twitter. I do not like to use social media, which also made me hesitant to use these APIs. Then when I wanted to try to use the real-time Instagram API, it appeared to be offlined by Facebook in 2018.
 
 I think that I can make something work with this API by polling a few times a second to simulate fully real-time data.
+
+### Endpoints
+
+* [Get all crypto currencies](https://min-api.cryptocompare.com/data/all/coinlist). This endpoint gives back an object of data with the crypto currency as a key, with the data it contains in an object in that key. From this endpoint I only use the FullName, Symbol and SortOrder. I store these (transformed) in the PostgreSQL database. This connection only happens when the `process.env.RUN_SEEDERS` is set to `'true'`.
+* [Get live updates for all crypto currencies](https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=EUR). This endpoint gives back an object with crypto currencies as keys, with an object containing the valuta of choice (this application will only use euro, because I am from Europe). This connection is being polled every second (more or less) and then stored in the `crypto_currencies` table in the database. The current value is being added to the `current_value` column.
+
+## Data life cycle
 
 ## Issues
 

@@ -29,6 +29,12 @@ interface BetChangeClientData {
     newBet: BetType
 }
 
+interface EffortChangeClientData {
+    groupId: number
+    participantId: number
+    effort: number
+}
+
 function onSocketConnection(sockets: SocketIO.Server) {
     return function(socket: SocketIO.Socket) {
         const queryParams: SocketIOQueryParams = url.parse(socket.handshake.url, true).query
@@ -67,6 +73,12 @@ function onGroupDetailConnection(socket: SocketIO.Socket, socketNameSpace: Socke
     socket.on('bet-changed-on-client', (data: BetChangeClientData) => {
         if (data.groupId === nameSpaceGroupId) {
             socketNameSpace.emit('bet-change-validated-on-server', data)
+        }
+    })
+
+    socket.on('effort-changed-on-client', (data: EffortChangeClientData) => {
+        if (data.groupId === nameSpaceGroupId) {
+            socketNameSpace.emit('effort-change-validated-on-server', data)
         }
     })
 }

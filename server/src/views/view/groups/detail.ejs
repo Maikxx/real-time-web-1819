@@ -37,7 +37,7 @@
                                 <td class="Table__cell">
                                     <%= participant.username %>
                                 </td>
-                                <td class="Table__cell" data-participant-id="<%= participant.participant_id %>">
+                                <td class="Table__cell TableCell--bet" data-participant-id="<%= participant.participant_id %>">
                                     <% if (participant.user_id === currentUserId) { %>
                                         <form
                                             action="groups/<%= groupId %>/change-bet/<%= participant.participant_id %>"
@@ -78,7 +78,7 @@
                                         <%= participant.bet ? participant.bet === 'HIGH' ? 'High' : 'Low' : 'No bet placed yet' %>
                                     <% } %>
                                 </td>
-                                <td class="Table__cell">
+                                <td class="Table__cell TableCell--effort" data-participant-id="<%= participant.participant_id %>">
                                     <% if (participant.user_id === currentUserId) { %>
                                         <form
                                             action="groups/<%= groupId %>/change-effort/<%= participant.participant_id %>"
@@ -88,12 +88,16 @@
                                             <input
                                                 type="number"
                                                 min="1"
-                                                max="1000"
+                                                max="50"
+                                                name="effort"
+                                                value="<%= participant.effort  %>"
                                                 step="1"
                                                 class="Input Input--small"
                                                 placeholder="€100"
                                             >
                                         </form>
+                                    <% } else { %>
+                                        <%= participant.effort > 0 ? `€${participant.effort}` : 'Effort has not been placed yet' %>
                                     <% } %>
                                 </td>
                                 <td class="Table__cell">

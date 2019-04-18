@@ -21,7 +21,8 @@ import { ChangeBetData, BetType } from '../types/Group'
 
     function onSocketConnection(socket: SocketIO.Socket) {
         socket.on('bet-change-validated-on-server', onBetChangeValidated)
-        setupFormEventListener(socket)
+        socket.on('effort-change-validated-on-server', onEffortChangeValidated)
+        setupFormEventListeners(socket)
     }
 
     function setupSockets() {
@@ -37,9 +38,35 @@ import { ChangeBetData, BetType } from '../types/Group'
         newBet: BetType
     }
 
+    interface EffortChangeClientData {
+        groupId: number
+        participantId: number
+        effort: number
+    }
+
+    function onEffortChangeValidated(data: EffortChangeClientData) {
+        const { participantId, effort } = data
+        const tableDataElements = document.querySelectorAll(`td[data-participant-id].TableCell--effort`)
+
+        if (tableDataElements && tableDataElements.length > 0) {
+            const effortElementToUpdate = Array.from(tableDataElements).find(element => {
+                const children = Array.from(element.childNodes)
+                const dataParticipantId = element.getAttribute('data-participant-id')
+
+                return !!dataParticipantId
+                    && Number(dataParticipantId) === participantId
+                    && !children.find(child => child.nodeName === 'FORM')
+            })
+
+            if (effortElementToUpdate) {
+                (effortElementToUpdate as HTMLTableDataCellElement).innerText = `€${String(effort)}`
+            }
+        }
+    }
+
     function onBetChangeValidated(data: BetChangeClientData) {
         const { participantId, newBet } = data
-        const tableDataElements = document.querySelectorAll(`td[data-participant-id]`)
+        const tableDataElements = document.querySelectorAll(`td[data-participant-id].TableCell--bet`)
 
         if (tableDataElements && tableDataElements.length > 0) {
             const bettingElementToUpdate = Array.from(tableDataElements).find(element => {
@@ -59,13 +86,65 @@ import { ChangeBetData, BetType } from '../types/Group'
         }
     }
 
-    function setupFormEventListener(socket: SocketIO.Socket) {
+    function setupFormEventListeners(socket: SocketIO.Socket) {
         const changeBetForm: HTMLFormElement | null = document.querySelector('.Form')
+        const changeEffortForm: Element | null = document.querySelectorAll('.Form')[1]
 
         if (changeBetForm) {
             changeBetForm.addEventListener('change', onChangeChangeBetForm(socket, changeBetForm))
         } else {
-            throw new Error('The group input could not be found!')
+            throw new Error('The change bet input could not be found!')
+        }
+
+        if (changeEffortForm) {
+            changeEffortForm.addEventListener('change', onChangeEffortForm(socket, changeEffortForm))
+        } else {
+            throw new Error('The change effort input could not be found!')
+        }
+    }
+
+    function onChangeEffortForm(socket: SocketIO.Socket, form: Element) {
+        return async function(event: Event) {
+            event.preventDefault()
+            const { target } = event
+
+            if (target) {
+                const formAction = form.getAttribute('action')
+                const participantId = form.getAttribute('data-participant-id')
+
+                if (formAction && participantId) {
+                    const url = `${window.location.origin}/api/${formAction}`
+                    const value = Number((target as HTMLSelectElement).value)
+
+                    if (value) {
+                        const response = await fetch(url, {
+                            body: JSON.stringify({ effort: value }),
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                        })
+
+                        const data: ChangeBetData = await response.json()
+
+                        if (data && data.success && !data.error) {
+                            socket.emit('effort-changed-on-client', {
+                                groupId: getGroupIdFromWindow(),
+                                participantId: Number(participantId),
+                                effort: value,
+                            })
+                        } else if (data.error) {
+                            throw new Error(data.error)
+                        }
+                    } else {
+                        throw new Error('You did not seem to have passed the correct data to the server.')
+                    }
+                } else {
+                    throw new Error('You did not seem to have passed the correct data to the server.')
+                }
+            } else {
+                throw new Error('The input could not be gathered from the event.')
+            }
         }
     }
 

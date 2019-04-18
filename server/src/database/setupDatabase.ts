@@ -41,7 +41,6 @@ export async function setupDatabase() {
                 email TEXT NOT NULL UNIQUE,
                 username TEXT NOT NULL,
                 password TEXT NOT NULL,
-                joined_groups INTEGER[],
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
 
@@ -51,6 +50,9 @@ export async function setupDatabase() {
             (
                 _id SERIAL PRIMARY KEY,
                 name TEXT NOT NULL UNIQUE,
+                value_history FLOAT[],
+                current_value FLOAT DEFAULT 0,
+                sort_order INTEGER,
                 symbol TEXT NOT NULL,
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );

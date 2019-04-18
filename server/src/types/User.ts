@@ -3,7 +3,6 @@ export interface User {
     email: string
     username: string
     password: string
-    joined_groups: any[] | null
     created_at: string
 }
 

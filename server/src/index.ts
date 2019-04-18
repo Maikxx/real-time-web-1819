@@ -33,6 +33,7 @@ import { getGroupListRoute } from './routes/get/groupListRoute'
 import { getGroupDetailRoute } from './routes/get/groupDetailRoute'
 import { seedDatabase } from './database/seedDatabase'
 import { postApiGroupsChangeBetRoute } from './routes/api/postApiGroupsChangeBetRoute'
+import { postApiGroupsChangeEffortRoute } from './routes/api/postApiGroupsChangeEffortRoute'
 
 const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
 
@@ -103,6 +104,7 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET
     app.post('/groups/create', postCreateGroupRoute)
 
     app.post('/api/groups/:groupId/change-bet/:participantId', postApiGroupsChangeBetRoute)
+    app.post('/api/groups/:groupId/change-effort/:participantId', postApiGroupsChangeEffortRoute)
 
     server.listen(({ port: process.env.PORT || 3000 }), () => {
         console.info(`App is now open for action on port ${process.env.PORT || 3000}.`)

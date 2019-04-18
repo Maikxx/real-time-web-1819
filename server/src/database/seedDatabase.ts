@@ -7,18 +7,32 @@ export async function seedDatabase() {
 }
 
 async function seedCryptoCurrencies() {
-    const cryptoCompareCoinListUrl = `https://min-api.cryptocompare.com/data/all/coinlist?api_key=${process.env.CRYPTO_COMPARE_KEY}`
+    try {
+        const cryptoCompareCoinListUrl = `https://min-api.cryptocompare.com/data/all/coinlist?api_key=${process.env.CRYPTO_COMPARE_KEY}`
 
-    const response: Response = await fetch(cryptoCompareCoinListUrl)
-    const { Data: data } = await response.json()
+        const response: Response = await fetch(cryptoCompareCoinListUrl)
+        const { Data: data } = await response.json()
 
-    await Promise.all(Object.keys(data).map(async key => {
-        const crypto = data[key]
-        const cryptoData = {
-            name: crypto.FullName,
-            symbol: crypto.Symbol,
-        }
+        await Promise.all(Object.keys(data).map(async key => {
+            const crypto = data[key]
 
-        await addCryptoCurrency(cryptoData)
-    }))
+            if (isNaN(Number(crypto.SortOrder))) {
+                return
+            }
+
+            const cryptoData = {
+                name: crypto.FullName,
+                symbol: crypto.Symbol,
+                sort_order: Number(crypto.SortOrder),
+            }
+
+            console.info(`Seeding ${cryptoData.name}`)
+
+            await addCryptoCurrency(cryptoData)
+        }))
+
+        console.info('Finished seeding crypto currencies')
+    } catch (error) {
+        throw new Error(error.message)
+    }
 }

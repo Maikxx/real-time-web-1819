@@ -3,7 +3,9 @@ import { database } from '../setupDatabase'
 export async function getAllCryptoCurrencies() {
     try {
         const { rows } = await database.query(
-            'SELECT * FROM crypto_currencies ORDER BY name ASC;'
+            `SELECT * FROM crypto_currencies
+            WHERE sort_order <= 100
+            ORDER BY name ASC;`
         )
 
         return rows
