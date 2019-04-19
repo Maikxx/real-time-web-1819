@@ -2,6 +2,10 @@
 
 [🚀 Live demo 🚀](https://rtw-3.herokuapp.com/)
 
+**Disclaimer**
+
+If you miss something, that is not in the [issues section of this readme](#Issues) yet, feel free to shoot in an issue [here](https://github.com/Maikxx/real-time-web-1819/issues).
+
 ## Table of Contents
 
 1. [Installation](#Installation)
@@ -133,6 +137,8 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 
 ## Issues
 
+* [ ] Enhance the data life cycle (**HIGH PRIO**) **MINOR**.
+* [ ] Add interaction-flow (**HIGH PRIO**) **MEDIUM**.
 * [ ] Real-time new users on the groups detail page (**HIGH PRIO**) **MEDIUM**.
 * [ ] Add feedback for real-time updates (**MEDIUM PRIO**) **MEDIUM**.
 * [ ] Add input validation and error feedback (**MEDIUM PRIO**) **MEDIUM**.
