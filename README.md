@@ -4,7 +4,13 @@
 
 **Disclaimer**
 
-If you miss something, that is not in the [issues section of this readme](#Issues) yet, feel free to shoot in an issue [here](https://github.com/Maikxx/real-time-web-1819/issues).
+If you miss something (in this readme or in the concept / issues), that is not in the [issues section of this readme](#Issues) yet, feel free to shoot in an issue [here](https://github.com/Maikxx/real-time-web-1819/issues).
+
+Some things, like the [Bonus features](#Bonus-features) I will certainly not have time for to create anymore.
+
+**Feedback requested**
+
+I would mainly like some more feedback on the issues I still have left, as to which are most important or what you would still like to see, as well as the concept as a whole (not that I will be able to change much at this point, but it's good to know). If you really feel like it, maybe a hint about what I should enhance about the styling, because I am not quite sure?
 
 ## Table of Contents
 
@@ -29,6 +35,8 @@ If you miss something, that is not in the [issues section of this readme](#Issue
 * Start the server with: `yarn start-server` or `npm run start-server`
 * Build the server with `yarn build-server` or `npm run build-server`
 * Start linting with: `yarn lint` or `npm run lint`
+
+* Register for a test account, log in to that account and create a group to start using the platform.
 
 ## Concept
 
@@ -143,6 +151,7 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 * [ ] Add feedback for real-time updates (**MEDIUM PRIO**) **MEDIUM**.
 * [ ] Add input validation and error feedback (**MEDIUM PRIO**) **MEDIUM**.
 * [ ] Improve styling (**LOW PRIO**) **MEDIUM**. (For Joost 🐵).
+* [ ] When a user signs up to the platform, they are not automatically logged in (**LOW PRIO**) **MEDIUM**.
 * [ ] Render client-side data without innerHTML (**VERY LOW PRIO**) **MINOR**.
 * [ ] Refactor database queries to be more concise (use nested joins) (**VERY LOW PRIO**) **MEDIUM**.
 * [X] Get all the available cryptocurrencies from the API to list on the create a group page (_/groups/create_).
