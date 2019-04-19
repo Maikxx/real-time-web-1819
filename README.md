@@ -30,6 +30,12 @@
 
 This platform makes it possible for groups of friends to participate in a game of crypto betting.
 
+This basically means that users sign up to the platform, join a group and set a bet for if value of the crypto currency of the group goes up in value (euros) or down in value.
+
+When you have joined a group, you will also need to put a hypothetical amount of money (between 1 and 50 euro) in for you to see in real-time what you could have won or lost doing that bet.
+
+Alternatively, users can also create their own new group with one of the top 50 cryptocurrencies at that moment. Doing this would enter you in the same flow as stated above.
+
 ### Application flow
 
 1. **Login / Sign up**
@@ -53,8 +59,9 @@ A wireflow of this will be added **shortly**.
 
 If I somehow have time to spare, I want to take up these points:
 
-* I want to make it possible for users to select a party privacy of _closed_, so that users can invite other people to their group.
-* I want to make it possible for users to click through to a page where they can follow the currency in a graph in real-time.
+* Make it possible for users to select a party privacy of _closed_, so that users can invite other people to their group.
+* Make it possible for users to click through to a page where they can follow the currency in a graph in real-time.
+* Make it possible to use all the crypto currencies that exist (over 4000).
 
 ## API
 
@@ -126,6 +133,7 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 
 ## Issues
 
+* [ ] Real-time new users on the groups detail page (**HIGH PRIO**) **MEDIUM**.
 * [ ] Add feedback for real-time updates (**MEDIUM PRIO**) **MEDIUM**.
 * [ ] Add input validation and error feedback (**MEDIUM PRIO**) **MEDIUM**.
 * [ ] Improve styling (**LOW PRIO**) **MEDIUM**. (For Joost 🐵).
