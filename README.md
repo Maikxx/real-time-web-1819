@@ -68,6 +68,41 @@ I think that I can make something work with this API by polling a few times a se
 
 ## Data life cycle
 
+### Version 1
+
+Add image of version 1, once I have a network connection again...
+
+### Database exploded view
+
+* **Users**
+    * _id: `number`
+    * email: `string`
+    * username: `string`
+    * password: `string` (Hashed)
+    * created_at: `Date`
+* **crypto_currencies**
+    * _id: `number`
+    * name: `string`
+    * value_history: `number` - Used to store the previous value of a specific currency in euros to compare with the current_value.
+    * current_value: `number` - Used to store the current live value of a specific currency in euros.
+    * sort_order: `number` - Used to determine if the crypto currency is in the top 50 most popular.
+    * symbol: `string`
+    * created_at: `Date`
+* **group_participants**
+    * _id: `number`
+    * user_id: `number`
+    * group_id: `number`
+    * bet: `string` - The current predicted value by a user (HIGH/LOW).
+    * effort: `number` - The amount a user has betted in euros.
+    * hypothetical_gain: `number` - The amount of money the user would have earned or lost, if they were to use euros to bet.
+    * score: `number` - Current amount of times the user has betted right on the course of the currency.
+    * created_at: `Date`
+* **groups**
+    _id: `number`
+    name: `string`
+    crypto_currency: `number`
+    created_at: `date`
+
 ## Issues
 
 * [ ] Add feedback for real-time updates (**MEDIUM PRIO**) **MEDIUM**.
