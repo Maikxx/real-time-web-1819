@@ -4,15 +4,27 @@
 
 ## Table of Contents
 
-1. [Concept](#Concept)
+1. [Installation](#Installation)
+2. [Concept](#Concept)
     1. [Application flow](#Application-flow)
     2. [Bonus features](#Bonus-features)
-2. [API](#API)
-3. [Data life cycle](#Data-life-cycle)
-4. [Issues](#Issues)
-5. [Sources](#Sources)
-6. [License](#License)
+3. [API](#API)
+4. [Data life cycle](#Data-life-cycle)
+5. [Issues](#Issues)
+6. [Sources](#Sources)
+7. [License](#License)
 
+## Installation
+
+* Make sure to install [yarn](https://yarnpkg.com/en/) or [npm](https://www.npmjs.com).
+* Make sure the **port** specified in the [package.json](package.json) is available (defaults to 3000).
+
+* Clone the repository: `git clone git@github.com:Maikxx/real-time-web-1819.git`
+* Navigate into the directory: `cd real-time-web-1819`
+* Install dependencies: `yarn` or `npm install`
+* Start the server with: `yarn start-server` or `npm run start-server`
+* Build the server with `yarn build-server` or `npm run build-server`
+* Start linting with: `yarn lint` or `npm run lint`
 
 ## Concept
 
