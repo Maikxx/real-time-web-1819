@@ -70,11 +70,15 @@ I think that I can make something work with this API by polling a few times a se
 
 ### Version 1
 
-Add image of version 1, once I have a network connection again...
+![Data life cycle 1](./docs/data-flow-1.jpg)
 
 ### Database exploded view
 
-* **Users**
+* **session** (created by express-session)
+    * sid: `string`
+    * sess: `json`
+    * expire: `Date`
+* **users**
     * _id: `number`
     * email: `string`
     * username: `string`
