@@ -61,6 +61,11 @@ This API does not contain a websocket connection, unfortunately, but I found the
 
 I think that I can make something work with this API by polling a few times a second to simulate fully real-time data.
 
+### Authorization
+
+The API uses a single private key to enforce the limits that are explained above.
+In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_KEY='YOUR_KEY'`.
+
 ### Endpoints
 
 * [Get all crypto currencies](https://min-api.cryptocompare.com/data/all/coinlist). This endpoint gives back an object of data with the crypto currency as a key, with the data it contains in an object in that key. From this endpoint I only use the FullName, Symbol and SortOrder. I store these (transformed) in the PostgreSQL database. This connection only happens when the `process.env.RUN_SEEDERS` is set to `'true'`.
