@@ -6,7 +6,7 @@
 
 If you miss something (in this readme or in the concept / issues), that is not in the [issues section of this readme](#Issues) yet, feel free to shoot in an issue [here](https://github.com/Maikxx/real-time-web-1819/issues).
 
-Some things, like the [Bonus features](#Bonus-features) I will certainly not have time for to create anymore.
+Some things, like the [bonus features](#Bonus-features) I will certainly not have time for to create anymore.
 
 **Feedback requested**
 
@@ -138,10 +138,10 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
     * score: `number` - Current amount of times the user has betted right on the course of the currency.
     * created_at: `Date`
 * **groups**
-    _id: `number`
-    name: `string`
-    crypto_currency: `number`
-    created_at: `date`
+    * _id: `number`
+    * name: `string`
+    * crypto_currency: `number`
+    * created_at: `date`
 
 ## Issues
 
