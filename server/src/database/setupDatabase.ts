@@ -57,6 +57,7 @@ export async function setupDatabase() {
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
 
+            ALTER TABLE crypto_currencies ADD COLUMN IF NOT EXISTS sort_order INTEGER;
             ${alterOwnerIfNotProduction('crypto_currencies')}
 
             CREATE TABLE IF NOT EXISTS group_participants
