@@ -69,7 +69,9 @@ Alternatively, users can also create their own new group with one of the top 50 
     On this page the user sees the currency, the group name and the participants. The participants are shown in a table form, where their name, their current bet and their amount of points is visible.
     On the row with your own name, which is highlighted, your betting field will be an input field with your current bet as default. You can change your bet by simply changing this dropdown.
 
-A wireflow of this will be added **shortly**.
+### Interaction flow
+
+![Interaction flow](./docs/interaction-flow.png)
 
 ### Bonus features
 
