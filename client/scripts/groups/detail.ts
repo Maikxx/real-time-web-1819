@@ -51,7 +51,6 @@ import { ChangeBetData, BetType, GroupParticipant } from '../types/Group'
             const gainElement = document.querySelector(`td[data-participant-id="${participant._id}"].TableCell--hypothetical-gain`)
 
             if (scoreElement && gainElement) {
-                console.log(scoreElement)
                 const previousScoreValue = Number(scoreElement.innerHTML)
                 const fluctuation = participant.score > previousScoreValue
                     ? 'UP'
