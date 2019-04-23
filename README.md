@@ -2,15 +2,19 @@
 
 [🚀 Live demo 🚀](https://rtw-3.herokuapp.com/)
 
-**Disclaimer**
+![Login page](./docs/login.png)
 
-If you miss something (in this readme or in the concept / issues), that is not in the [issues section of this readme](#Issues) yet, feel free to shoot in an issue [here](https://github.com/Maikxx/real-time-web-1819/issues).
+![Signup page](./docs/signup.png)
 
-Some things, like the [bonus features](#Bonus-features) I will certainly not have time for to create anymore.
+![Dashboard page](./docs/dashboard.png)
 
-**Feedback requested**
+![Join page](./docs/join.png)
 
-I would mainly like some more feedback on the issues I still have left, as to which are most important or what you would still like to see, as well as the concept as a whole (not that I will be able to change much at this point, but it's good to know). If you really feel like it, maybe a hint about what I should enhance about the styling, because I am not quite sure?
+![Joined groups list page](./docs/list.png)
+
+![Joined groups detail page](./docs/detail.png)
+
+![Create group page](./docs/create.png)
 
 ## Table of Contents
 
