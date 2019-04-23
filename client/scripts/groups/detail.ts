@@ -51,10 +51,30 @@ import { ChangeBetData, BetType, GroupParticipant } from '../types/Group'
             const gainElement = document.querySelector(`td[data-participant-id="${participant._id}"].TableCell--hypothetical-gain`)
 
             if (scoreElement && gainElement) {
-                scoreElement.innerHTML = String(participant.score)
-                gainElement.innerHTML = `€${participant.hypothetical_gain}`
+                console.log(scoreElement)
+                const previousScoreValue = Number(scoreElement.innerHTML)
+                const fluctuation = participant.score > previousScoreValue
+                    ? 'UP'
+                    : 'DOWN'
+
+                animateTextColor(scoreElement, fluctuation, String(participant.score))
+                animateTextColor(gainElement, fluctuation, `€${participant.hypothetical_gain}`)
             }
         })
+    }
+
+    function animateTextColor(element: Element, fluctuation: string, value: string) {
+        (element as HTMLElement).style.color = fluctuation === 'UP'
+            ? 'green'
+            : 'crimson'
+
+        setTimeout(() => {
+            (element as HTMLElement).innerText = value
+        }, 0)
+
+        setTimeout(() => {
+            (element as HTMLElement).style.color = '#000000'
+        }, 300)
     }
 
     function onEffortChangeValidated(data: EffortChangeClientData) {
