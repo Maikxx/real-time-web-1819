@@ -150,7 +150,6 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 ## Issues
 
 * [ ] Add interaction-flow (**HIGH PRIO**) **MEDIUM**.
-* [ ] Real-time new users on the groups detail page (**HIGH PRIO**) **MEDIUM**.
 * [ ] Add server-side input validation (**LOW PRIO**) **MEDIUM**
 * [ ] Add server-side error feedback (**LOW PRIO**) **MINOR**.
 * [ ] When a user signs up to the platform, they are not automatically logged in (**LOW PRIO**) **MEDIUM**.
@@ -167,6 +166,7 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 * [X] Implement login and signup (_/login_ & _/signup_).
 * [X] Implement score incrementation.
 * [X] Implement sockets on (_/groups/join_ & _/groups/detail_).
+* [X] Real-time new users on the groups detail page (**HIGH PRIO**) **MEDIUM**.
 * [X] Render a groups detail view (_/groups/detail_) correctly and implement editing you current row.
 * [X] Render all groups server-side in which the current user is present (_/groups/list_).
 

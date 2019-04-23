@@ -82,6 +82,10 @@ function onGroupDetailConnection(socket: SocketIO.Socket, socketNameSpace: Socke
         socketNameSpace.emit('group-participants-changed', data)
     })
 
+    socket.on('subscribe-to-group', (group: { id: number }) => {
+        groupParticipantCreationEmitter.on(`new-group-participant-added-to-group-${group.id}`, onNewGroupParticipantAdded(socketNameSpace, group.id))
+    })
+
     socket.on('effort-changed-on-client', (data: EffortChangeClientData) => {
         if (data.groupId === nameSpaceGroupId) {
             socketNameSpace.emit('effort-change-validated-on-server', data)

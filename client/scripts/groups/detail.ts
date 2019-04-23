@@ -21,9 +21,16 @@ import { ChangeBetData, BetType, GroupParticipant } from '../types/Group'
     }
 
     function onSocketConnection(socket: SocketIO.Socket) {
+        const { pathname } = window.location
+        const groupId = Number(pathname[pathname.lastIndexOf('/') + 1])
+
         socket.on('bet-change-validated-on-server', onBetChangeValidated)
         socket.on('effort-change-validated-on-server', onEffortChangeValidated)
         socket.on('group-participants-changed', onGroupParticipantChanged)
+        socket.on('new-participant-added', onNewParticipantAdded)
+        socket.emit('subscribe-to-group', {
+            id: groupId,
+        })
         setupFormEventListeners(socket)
     }
 
@@ -44,6 +51,55 @@ import { ChangeBetData, BetType, GroupParticipant } from '../types/Group'
         groupId: number
         participantId: number
         effort: number
+    }
+
+    interface NewParticipantAddedParams {
+        participant: {
+            username: string
+            _id: number
+        }
+        groupId: number
+    }
+
+    function onNewParticipantAdded(params: NewParticipantAddedParams) {
+        const { pathname } = window.location
+        const groupId = Number(pathname[pathname.lastIndexOf('/') + 1])
+        const { groupId: validationGroupId, participant } = params
+
+        if (validationGroupId === Number(groupId)) {
+            const tableBody = document.querySelector('.Table__body')
+
+            if (tableBody) {
+                const tableRows = tableBody.querySelectorAll('tr')
+
+                if (tableRows && tableRows.length > 0) {
+                    // tslint:disable-next-line:ter-max-len
+                    const existingUserRow = Array.from(tableRows).find(tableRow => Number(tableRow.getAttribute('data-participant-id')) === participant._id)
+
+                    if (!existingUserRow) {
+                        tableBody.innerHTML += `
+                            <tr class="Table__row" data-participant-id="${participant._id}">
+                                <td class="Table__cell">
+                                    ${participant.username}
+                                </td>
+                                <td class="Table__cell TableCell--bet" data-participant-id="${participant._id}">
+                                    No bet placed yet
+                                </td>
+                                <td class="Table__cell TableCell--effort" data-participant-id="${participant._id}">
+                                    Effort has not been placed yet
+                                </td>
+                                <td class="Table__cell TableCell--score" data-participant-id="${participant._id}">
+                                    0
+                                </td>
+                                <td class="Table__cell TableCell--hypothetical-gain" data-participant-id="${participant._id}">
+                                    €0
+                                </td>
+                            </tr>
+                        `
+                    }
+                }
+            }
+        }
     }
 
     function onGroupParticipantChanged(participants: GroupParticipant[]) {

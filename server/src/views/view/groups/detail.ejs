@@ -33,7 +33,7 @@
                     </thead>
                     <tbody class="Table__body">
                         <% groupParticipants.forEach(participant => { %>
-                            <tr class="Table__row">
+                            <tr class="Table__row" data-participant-id="<%= participant.participant_id %>">
                                 <td class="Table__cell">
                                     <%= participant.username %>
                                 </td>
