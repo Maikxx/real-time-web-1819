@@ -11,18 +11,22 @@
                 <h2 class="PageSubTitle">
                     Your joined groups
                 </h2>
-                <ul class="Row Row--wrap">
-                    <% groups.forEach(group => { %>
-                        <li>
-                            <a
-                                href="/groups/<%= group._id %>"
-                                class="Button Button--block Button--small"
-                            >
-                                <%= group.name %>
-                            </a>
-                        </li>
-                    <% }) %>
-                </ul>
+                <% if (groups && groups.length > 0) { %>
+                    <ul class="Row Row--wrap">
+                        <% groups.forEach(group => { %>
+                            <li>
+                                <a
+                                    href="/groups/<%= group._id %>"
+                                    class="Button Button--block Button--small"
+                                >
+                                    <%= group.name %>
+                                </a>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } else { %>
+                    <p>It looks like you have not joined any groups yet. You can <a href="/groups/join">join a group here</a>.</p>
+                <% } %>
             </section>
         </main>
     </body>
