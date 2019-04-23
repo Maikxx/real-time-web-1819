@@ -59,7 +59,7 @@ export async function getGroupCreateRoute(request: express.Request, response: ex
             })
         } catch (error) {
             console.error(error.message)
-            response.status(500).redirect('/?error=internal')
+            response.status(500).redirect('/dashboard?error=internal')
         }
     } else {
         console.error('It looks like you are not logged in!')
@@ -87,7 +87,7 @@ export async function postSignUpRoute(request: express.Request, response: expres
         }
     } catch (error) {
         console.error(error.message)
-        response.redirect('/?error=internal')
+        response.redirect('/login?error=internal')
     }
 }
 
