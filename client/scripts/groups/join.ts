@@ -1,5 +1,6 @@
 import 'babel-polyfill'
 import SocketIO from 'socket.io-client'
+import toast from 'toastr'
 import { GroupQueryResult, Group } from '../types/Group'
 
 interface NewParticipantAddedParams {
@@ -14,7 +15,7 @@ interface NewParticipantAddedParams {
     if (SocketIO) {
         setupSockets()
     } else {
-        throw new Error('Sockets could not be loaded for some reason!')
+        toast.error('Sockets could not be loaded for some reason!')
     }
 
     function setupSockets() {
@@ -52,7 +53,7 @@ interface NewParticipantAddedParams {
         if (groupInput) {
             groupInput.addEventListener('change', onChangeGroupInput(socket))
         } else {
-            throw new Error('The group input could not be found!')
+            toast.error('The group input could not be found!')
         }
     }
 
@@ -90,16 +91,16 @@ interface NewParticipantAddedParams {
                         if (data && !data.error) {
                             JS_DYNAMIC_HTML_HOOK.innerHTML = getGroupDetailMarkup(data.group)
                         } else {
-                            throw new Error(data.error as string)
+                            toast.error(data.error as string)
                         }
                     } catch (error) {
-                        throw new Error(error.message)
+                        toast.error(error.message)
                     }
                 } else {
-                    throw new Error('It looks like you tried to hack the system here!')
+                    toast.error('It looks like you tried to hack the system here!')
                 }
             } else {
-                throw new Error('One of the required elements could not be found!')
+                toast.error('One of the required elements could not be found!')
             }
         }
     }

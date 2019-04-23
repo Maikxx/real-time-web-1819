@@ -1,16 +1,17 @@
 import 'babel-polyfill'
 import SocketIO from 'socket.io-client'
+import toast from 'toastr'
 import { ChangeBetData, BetType, GroupParticipant } from '../types/Group'
 
-(() => {
+; (() => {
     if (SocketIO) {
         if (!isNaN(getGroupIdFromWindow())) {
             setupSockets()
         } else {
-            throw new Error('Invalid group id is being passed to the server.')
+            toast.error('Invalid group id is being passed to the server.')
         }
     } else {
-        throw new Error('Sockets could not be loaded for some reason!')
+        toast.error('Sockets could not be loaded for some reason!')
     }
 
     function connect(nameSpace: string) {
@@ -125,13 +126,13 @@ import { ChangeBetData, BetType, GroupParticipant } from '../types/Group'
         if (changeBetForm) {
             changeBetForm.addEventListener('change', onChangeChangeBetForm(socket, changeBetForm))
         } else {
-            throw new Error('The change bet input could not be found!')
+            toast.error('The change bet input could not be found!')
         }
 
         if (changeEffortForm) {
             changeEffortForm.addEventListener('change', onChangeEffortForm(socket, changeEffortForm))
         } else {
-            throw new Error('The change effort input could not be found!')
+            toast.error('The change effort input could not be found!')
         }
     }
 
@@ -166,16 +167,16 @@ import { ChangeBetData, BetType, GroupParticipant } from '../types/Group'
                                 effort: value,
                             })
                         } else if (data.error) {
-                            throw new Error(data.error)
+                            toast.error(data.error)
                         }
                     } else {
-                        throw new Error('You did not seem to have passed the correct data to the server.')
+                        toast.error('You did not seem to have passed the correct data to the server.')
                     }
                 } else {
-                    throw new Error('You did not seem to have passed the correct data to the server.')
+                    toast.error('You did not seem to have passed the correct data to the server.')
                 }
             } else {
-                throw new Error('The input could not be gathered from the event.')
+                toast.error('The input could not be gathered from the event.')
             }
         }
     }
@@ -210,14 +211,14 @@ import { ChangeBetData, BetType, GroupParticipant } from '../types/Group'
                                 newBet: value,
                             })
                         } else if (data.error) {
-                            throw new Error(data.error)
+                            toast.error(data.error)
                         }
                     } else {
-                        throw new Error('You did not seem to have passed the correct data to the server.')
+                        toast.error('You did not seem to have passed the correct data to the server.')
                     }
                 }
             } else {
-                throw new Error('The input could not be gathered from the event.')
+                toast.error('The input could not be gathered from the event.')
             }
         }
     }
