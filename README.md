@@ -108,6 +108,10 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 
 ![Data life cycle 1](./docs/data-flow-1.jpg)
 
+### Version 2
+
+![Data life cycle 2](./docs/data-flow-2.png)
+
 ### Database exploded view
 
 * **session** (created by express-session)
