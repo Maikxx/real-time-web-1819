@@ -1,7 +1,7 @@
 require('dotenv').config()
 import fetch from 'node-fetch'
 import Poll from 'async-polling'
-import _ from 'lodash'
+import _, { uniqBy } from 'lodash'
 import { database } from '../database/setupDatabase'
 import { CryptoCurrency } from '../types/CryptoCurrency'
 import { groupScoreChanged } from './events'
@@ -55,7 +55,7 @@ export async function setupPolling(full?: boolean) {
                                     `SELECT
                                         group_participants._id,
                                         group_participants.bet,
-                                        groups._id AS groupId
+                                        group_participants.group_id
                                     FROM group_participants
                                     LEFT JOIN groups
                                         ON (groups._id = group_participants.group_id)
@@ -82,7 +82,11 @@ export async function setupPolling(full?: boolean) {
                                         }
                                     }))
 
-                                    groupScoreChanged.emit(`group-${participants[0].group_id}-changed`, participants)
+                                    const uniqueGroupIds = uniqBy(participants, 'group_id').map(participant => participant.group_id)
+                                    uniqueGroupIds.forEach(groupId => {
+                                        const participantsForGroup = participants.filter(participant => participant.group_id === groupId)
+                                        groupScoreChanged.emit(`group-${groupId}-changed`, participantsForGroup)
+                                    })
                                 }
                             }))
                         }
