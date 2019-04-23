@@ -154,6 +154,7 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 * [ ] Add feedback for real-time updates (**MEDIUM PRIO**) **MEDIUM**.
 * [ ] Add input validation and error feedback (**MEDIUM PRIO**) **MEDIUM**.
 * [ ] When a user signs up to the platform, they are not automatically logged in (**LOW PRIO**) **MEDIUM**.
+* [ ] Add ability to sort columns in the group detail table (**LOW PRIO**) **MEDIUM**.
 * [ ] Render client-side data without innerHTML (**VERY LOW PRIO**) **MINOR**.
 * [ ] Refactor database queries to be more concise (use nested joins) (**VERY LOW PRIO**) **MEDIUM**.
 * [X] Enhance the data life cycle.
