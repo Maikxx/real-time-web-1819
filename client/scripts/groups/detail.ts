@@ -148,7 +148,7 @@ import { ChangeBetData, BetType, GroupParticipant } from '../types/Group'
                     const url = `${window.location.origin}/api/${formAction}`
                     const value = Number((target as HTMLSelectElement).value)
 
-                    if (value) {
+                    if (value && value > 0 && value <= 50) {
                         const response = await fetch(url, {
                             body: JSON.stringify({ effort: value }),
                             method: 'POST',
