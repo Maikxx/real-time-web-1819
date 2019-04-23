@@ -153,7 +153,6 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 * [ ] Real-time new users on the groups detail page (**HIGH PRIO**) **MEDIUM**.
 * [ ] Add feedback for real-time updates (**MEDIUM PRIO**) **MEDIUM**.
 * [ ] Add input validation and error feedback (**MEDIUM PRIO**) **MEDIUM**.
-* [ ] Improve styling (**LOW PRIO**) **MEDIUM**. (For Joost 🐵).
 * [ ] When a user signs up to the platform, they are not automatically logged in (**LOW PRIO**) **MEDIUM**.
 * [ ] Render client-side data without innerHTML (**VERY LOW PRIO**) **MINOR**.
 * [ ] Refactor database queries to be more concise (use nested joins) (**VERY LOW PRIO**) **MEDIUM**.
