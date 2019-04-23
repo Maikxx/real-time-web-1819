@@ -151,12 +151,13 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 
 * [ ] Add interaction-flow (**HIGH PRIO**) **MEDIUM**.
 * [ ] Real-time new users on the groups detail page (**HIGH PRIO**) **MEDIUM**.
-* [ ] Add input validation (**LOW PRIO**) **MEDIUM**
+* [ ] Add server-side input validation (**LOW PRIO**) **MEDIUM**
+* [ ] Add server-side error feedback (**LOW PRIO**) **MINOR**.
 * [ ] When a user signs up to the platform, they are not automatically logged in (**LOW PRIO**) **MEDIUM**.
 * [ ] Add ability to sort columns in the group detail table (**LOW PRIO**) **MEDIUM**.
 * [ ] Render client-side data without innerHTML (**VERY LOW PRIO**) **MINOR**.
 * [ ] Refactor database queries to be more concise (use nested joins) (**VERY LOW PRIO**) **MEDIUM**.
-* [X] Add error feedback (**LOW PRIO**) **MINOR**.
+* [X] Add client-side error feedback (**LOW PRIO**) **MINOR**.
 * [X] Add feedback for real-time updates (**MEDIUM PRIO**) **MEDIUM**.
 * [X] Enhance the data life cycle.
 * [X] Get all the available cryptocurrencies from the API to list on the create a group page (_/groups/create_).
