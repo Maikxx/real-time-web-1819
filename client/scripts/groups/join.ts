@@ -84,6 +84,12 @@ interface NewParticipantAddedParams {
 
                                 if (userListElement && !userListElement.innerHTML.includes(`data-user-id="${params.participant._id}"`)) {
                                     userListElement.innerHTML += `<li data-user-id="${params.participant._id}">${participant.username}</li>`
+
+                                    ; (userListElement as HTMLElement).style.color = 'green'
+
+                                    setTimeout(() => {
+                                        (userListElement as HTMLElement).style.color = '#000000'
+                                    }, 300)
                                 }
                             }
                         })
