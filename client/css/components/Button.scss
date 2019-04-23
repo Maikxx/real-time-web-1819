@@ -40,4 +40,9 @@
     &--small {
         padding: 1.5em 3em;
     }
+
+    &--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
 }

@@ -46,7 +46,7 @@
         "no-extra-boolean-cast": true,
         "no-extra-parens": ["all", { "returnAssign": false }],
         "no-extra-semi": true,
-        "no-inner-declarations": true,
+        "no-inner-declarations": false,
         "no-invalid-regexp": true,
         "no-invalid-this": true,
         "no-magic-numbers": false,
