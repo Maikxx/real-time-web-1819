@@ -12,3 +12,7 @@
     justify-content: center;
     min-width: 80vw;
 }
+
+.ActionRow__item + .ActionRow__item {
+    margin-left: 1em;
+}

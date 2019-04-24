@@ -12,9 +12,9 @@
                     Your joined groups
                 </h2>
                 <% if (groups && groups.length > 0) { %>
-                    <ul class="Row Row--wrap">
+                    <ul class="Row Row--wrap ActionRow">
                         <% groups.forEach(group => { %>
-                            <li>
+                            <li class="ActionRow__item">
                                 <a
                                     href="/groups/<%= group._id %>"
                                     class="Button Button--block Button--small"

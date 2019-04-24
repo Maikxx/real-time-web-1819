@@ -51,3 +51,7 @@ body main {
     text-transform: capitalize;
     font-size: 2em;
 }
+
+.BlockList__item + .BlockList__item {
+    margin-left: 1em;
+}
