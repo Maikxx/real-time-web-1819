@@ -2,18 +2,30 @@
 
 .Table {
     table-layout: auto;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     width: 90vw;
     border-collapse: collapse;
+
+    &__row {
+        border-top: 1px solid $color-black;
+        padding: 2em 1em;
+        display: flex;
+        align-items: center;
+    }
 
     &__cell,
     &__heading {
         padding: 1em .5em;
         text-align: left;
+        flex: 1;
         text-overflow: ellipsis;
     }
 
-    &__row {
-        border: 1px solid $color-black;
+    &__head {
+        .Table__row {
+            border-top: none;
+            padding: .5em;
+        }
     }
 
     &__cell {

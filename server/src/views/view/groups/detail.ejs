@@ -7,9 +7,9 @@
     <body>
         <main>
             <% include ../../partials/pageHeader %>
-            <section class="CenterView">
+            <section class="Column Column--horizontal-center">
                 <h2 class="PageSubTitle">
-                    <%= groupName %> (<%= cryptoCurrency %>)
+                    <%= groupName %> - <%= cryptoCurrency %>
                 </h2>
                 <table class="Table">
                     <thead class="Table__head">
@@ -44,7 +44,7 @@
                                             class="Form"
                                             data-participant-id="<%= participant.participant_id %>"
                                         >
-                                            <select name="myBet" class="Input Input--small">
+                                            <select name="myBet" class="Input Input--small Input--underline">
                                                 <% if (participant.bet !== 'HIGH' && participant.bet !== 'LOW') { %>
                                                     <option value="" disabled selected>
                                                         Select
@@ -92,7 +92,7 @@
                                                 name="effort"
                                                 value="<%= participant.effort  %>"
                                                 step="1"
-                                                class="Input Input--small"
+                                                class="Input Input--small Input--underline"
                                                 placeholder="€100"
                                             >
                                         </form>

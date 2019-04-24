@@ -120,17 +120,12 @@ import { ChangeBetData, BetType, GroupParticipant } from '../types/Group'
     }
 
     function animateTextColor(element: Element, fluctuation: string, value: string) {
-        (element as HTMLElement).style.color = fluctuation === 'UP'
-            ? 'green'
-            : 'crimson'
+        (element as HTMLElement).style.setProperty('color', fluctuation === 'UP' ? 'green' : 'crimson')
+        ; (element as HTMLElement).style.setProperty('transform', 'scale(1.5)')
 
         setTimeout(() => {
             (element as HTMLElement).innerText = value
         }, 0)
-
-        setTimeout(() => {
-            (element as HTMLElement).style.color = '#000000'
-        }, 300)
     }
 
     function onEffortChangeValidated(data: EffortChangeClientData) {

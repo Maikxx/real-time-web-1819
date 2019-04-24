@@ -45,7 +45,8 @@ body main {
 @import './components/Table.scss';
 
 .PageSubTitle {
-    margin-bottom: 2em;
+    margin-top: 2em;
+    margin-bottom: 1em;
     text-align: center;
     font-weight: bold;
     text-transform: capitalize;
@@ -54,4 +55,13 @@ body main {
 
 .BlockList__item + .BlockList__item {
     margin-left: 1em;
+}
+
+.Column {
+    display: flex;
+    flex-direction: column;
+
+    &--horizontal-center {
+        align-items: center;
+    }
 }

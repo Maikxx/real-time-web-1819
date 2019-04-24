@@ -16,4 +16,11 @@
         width: 6em;
         min-width: initial;
     }
+
+    &--underline {
+        border: none;
+        padding: .5em;
+        border-radius: 0;
+        border-bottom: 2px solid $color-black;
+    }
 }
