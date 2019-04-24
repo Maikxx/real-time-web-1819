@@ -16,7 +16,7 @@
     1. [Version 1](#Version-1)
     2. [Version 2](#Version-2)
     3. [Database exploded view](#Database-exploded-view)
-5. [Issues](#Issues)
+5. [Features](#Features)
 6. [Sources](#Sources)
 7. [License](#License)
 
@@ -166,7 +166,7 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
     * crypto_currency: `number`
     * created_at: `date`
 
-## Issues
+## Features
 
 * [ ] Add server-side input validation (**MEDIUM PRIO**) **MEDIUM**
 * [ ] When a user signs up to the platform, they are not automatically logged in (**LOW PRIO**) **MEDIUM**.
@@ -176,7 +176,7 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 * [X] Add interaction-flow.
 * [X] Add client-side error feedback.
 * [X] Add feedback for real-time updates.
-* [X] Add server-side error feedback (**LOW PRIO**) **MINOR**.
+* [X] Add server-side error feedback.
 * [X] Enhance the data life cycle.
 * [X] Get all the available cryptocurrencies from the API to list on the create a group page (_/groups/create_).
 * [X] Implement client-side rendering of the join groups page (_/groups/join_).
