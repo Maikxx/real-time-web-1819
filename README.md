@@ -73,7 +73,7 @@ Alternatively, users can also create their own new group with one of the top 50 
 
     ![Joined groups list page](./docs/list.png)
 
-    3. When the user choose to create a new group, they are prompted with a window that contains a form. In this form, the group name, group currency and (if I have time, see **bonus** below) the group privacy level. When submitted, they are taken to the detail page of that group.
+    3. When the user choose to create a new group, they are prompted with a window that contains a form. In this form, the group name, group currency and (if I have time, see [future enhancements](#future-enhancements) below) the group privacy level. When submitted, they are taken to the detail page of that group.
 
     ![Create group page](./docs/create.png)
 
