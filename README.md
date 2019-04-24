@@ -7,7 +7,7 @@
 1. [Installation](#Installation)
 2. [Concept](#Concept)
     1. [Application flow](#Application-flow)
-    2. [Bonus features](#Bonus-features)
+    2. [Interaction flow](#Interaction-flow)
 3. [API](#API)
     1. [Limits](#Limits)
     2. [Authorization](#Authorization)
@@ -17,8 +17,9 @@
     2. [Version 2](#Version-2)
     3. [Database exploded view](#Database-exploded-view)
 5. [Features](#Features)
-6. [Sources](#Sources)
-7. [License](#License)
+6. [Future enhancements](#Future-enhancements)
+7. [Sources](#Sources)
+8. [License](#License)
 
 ## Installation
 
@@ -85,14 +86,6 @@ Alternatively, users can also create their own new group with one of the top 50 
 ### Interaction flow
 
 ![Interaction flow](./docs/interaction-flow.png)
-
-### Bonus features
-
-If I somehow have time to spare, I want to take up these points:
-
-* Make it possible for users to select a party privacy of _closed_, so that users can invite other people to their group.
-* Make it possible for users to click through to a page where they can follow the currency in a graph in real-time.
-* Make it possible to use all the crypto currencies that exist (over 4000).
 
 ## API
 
@@ -168,26 +161,31 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 
 ## Features
 
-* [ ] Add server-side input validation (**MEDIUM PRIO**) **MEDIUM**
-* [ ] When a user signs up to the platform, they are not automatically logged in (**LOW PRIO**) **MEDIUM**.
-* [ ] Add ability to sort columns in the group detail table (**LOW PRIO**) **MEDIUM**.
-* [ ] Render client-side data without innerHTML (**VERY LOW PRIO**) **MINOR**.
-* [ ] Refactor database queries to be more concise (use nested joins) (**VERY LOW PRIO**) **MEDIUM**.
-* [X] Add interaction-flow.
-* [X] Add client-side error feedback.
-* [X] Add feedback for real-time updates.
-* [X] Add server-side error feedback.
-* [X] Enhance the data life cycle.
+* [X] Client-side error feedback.
+* [X] Client-side rendering of the join groups page (_/groups/join_).
+* [X] Data life cycle.
+* [X] Feedback for real-time updates.
 * [X] Get all the available cryptocurrencies from the API to list on the create a group page (_/groups/create_).
-* [X] Implement client-side rendering of the join groups page (_/groups/join_).
-* [X] Implement group creation (_/groups/create_).
-* [X] Implement joining groups (_/groups/join_).
-* [X] Implement login and signup (_/login_ & _/signup_).
-* [X] Implement score incrementation.
-* [X] Implement sockets on (_/groups/join_ & _/groups/detail_).
-* [X] Real-time new users on the groups detail page.
-* [X] Render a groups detail view (_/groups/detail_) correctly and implement editing you current row.
+* [X] Group creation (_/groups/create_).
+* [X] Interaction-flow.
+* [X] Joining groups (_/groups/join_).
+* [X] Login and signup (_/login_ & _/signup_).
+* [X] Real-time bet and effort changes on _/groups/detail_.
+* [X] Real-time updates for pretty much everything in the table on _/groups/detail_.
+* [X] Real-time users being added to the list of users in a group on _/groups/join_.
 * [X] Render all groups server-side in which the current user is present (_/groups/list_).
+* [X] Server-side error feedback.
+
+## Future enhancements
+
+* [ ] Add ability to sort columns in the group detail table.
+* [ ] Add server-side input validation.
+* [ ] Make it possible for users to click through to a page where they can follow the currency in a graph in real-time.
+* [ ] Make it possible for users to select a party privacy of _closed_, so that users can invite other people to their group.
+* [ ] Make it possible to use all the crypto currencies that exist (over 4000).
+* [ ] Refactor database queries to be more concise (use nested joins).
+* [ ] Render client-side data without innerHTML.
+* [ ] When a user signs up to the platform, they are not automatically logged in.
 
 ## Sources
 
