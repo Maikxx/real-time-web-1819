@@ -2,10 +2,10 @@ import toast from 'toastr'
 import { State } from './State'
 
 (() => {
-    const loginButton = document.querySelector('.Button--action')
+    const actionButton = document.querySelector('.Button--action')
     const state = new State({})
 
-    if (loginButton) {
+    if (actionButton) {
         disableActionButton()
 
         const emailInput = document.querySelector('[name="email"]')
@@ -42,16 +42,16 @@ import { State } from './State'
         }
 
         function disableActionButton() {
-            if (loginButton) {
-                loginButton.setAttribute('disabled', 'disabled')
-                loginButton.classList.add('Button--disabled')
+            if (actionButton) {
+                actionButton.setAttribute('disabled', 'disabled')
+                actionButton.classList.add('Button--disabled')
             }
         }
 
         function enableActionButton() {
-            if (loginButton) {
-                loginButton.removeAttribute('disabled')
-                loginButton.classList.remove('Button--disabled')
+            if (actionButton) {
+                actionButton.removeAttribute('disabled')
+                actionButton.classList.remove('Button--disabled')
             }
         }
     }
