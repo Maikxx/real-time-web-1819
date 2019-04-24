@@ -21,6 +21,11 @@
         text-overflow: ellipsis;
     }
 
+    &__heading {
+        font-weight: 400;
+        color: grey;
+    }
+
     &__head {
         .Table__row {
             border-top: none;
