@@ -180,6 +180,7 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 
 * [ ] Add ability to sort columns in the group detail table.
 * [ ] Add server-side input validation.
+* [ ] Improve server security.
 * [ ] Make it possible for users to click through to a page where they can follow the currency in a graph in real-time.
 * [ ] Make it possible for users to select a party privacy of _closed_, so that users can invite other people to their group.
 * [ ] Make it possible to use all the crypto currencies that exist (over 4000).
