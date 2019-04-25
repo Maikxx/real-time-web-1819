@@ -44,5 +44,9 @@
     &--disabled {
         opacity: 0.5;
         cursor: not-allowed;
+
+        &.Button--action:hover {
+            background-color: $color-action;
+        }
     }
 }
