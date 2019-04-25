@@ -1,6 +1,7 @@
 import 'babel-polyfill'
 import SocketIO from 'socket.io-client'
 import toast from 'toastr'
+import anime from 'animejs'
 import { ChangeBetData, BetType, GroupParticipant } from '../types/Group'
 
 ; (() => {
@@ -23,6 +24,14 @@ import { ChangeBetData, BetType, GroupParticipant } from '../types/Group'
     function onSocketConnection(socket: SocketIO.Socket) {
         const { pathname } = window.location
         const groupId = Number(pathname[pathname.lastIndexOf('/') + 1])
+
+        anime({
+            targets: '.PageHeader__icon',
+            rotate: 720,
+            scale: 1.2,
+            duration: 2000,
+            loop: true,
+        })
 
         socket.on('bet-change-validated-on-server', onBetChangeValidated)
         socket.on('effort-change-validated-on-server', onEffortChangeValidated)
@@ -121,7 +130,6 @@ import { ChangeBetData, BetType, GroupParticipant } from '../types/Group'
 
     function animateTextColor(element: Element, fluctuation: string, value: string) {
         (element as HTMLElement).style.setProperty('color', fluctuation === 'UP' ? 'green' : 'crimson')
-        ; (element as HTMLElement).style.setProperty('transform', 'scale(1.5)')
 
         setTimeout(() => {
             (element as HTMLElement).innerText = value

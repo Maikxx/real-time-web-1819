@@ -1,6 +1,7 @@
 import 'babel-polyfill'
 import SocketIO from 'socket.io-client'
 import toast from 'toastr'
+import anime from 'animejs'
 import { GroupQueryResult, Group } from '../types/Group'
 
 interface NewParticipantAddedParams {
@@ -32,6 +33,13 @@ interface NewParticipantAddedParams {
 
     function onSocketConnection(socket: SocketIOClient.Socket) {
         socket.on('new-group-added', onNewGroupAdded)
+        anime({
+            targets: '.PageHeader__icon',
+            rotate: 720,
+            scale: 1.2,
+            duration: 2000,
+            loop: true,
+        })
         setupFormEventListener(socket)
     }
 

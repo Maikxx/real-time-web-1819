@@ -1,1 +1,1 @@
-.PageHeader{width:100%;padding:2em;background-color:#0e6e6c}.PageHeader__nav{justify-content:space-between;position:relative}.PageHeader__icon{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}.PageHeader__logout{padding:.5em;border:0}
+.PageHeader{width:100%;padding:2em;background-color:#0e6e6c}.PageHeader__nav{justify-content:space-between;position:relative}.PageHeader__icon{position:absolute;left:calc(50% - 25px);top:calc(50% - 25px);transform-origin:50% 50%}.PageHeader__logout{padding:.5em;border:0}
