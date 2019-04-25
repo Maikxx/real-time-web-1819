@@ -179,6 +179,7 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 ## Future enhancements
 
 * [ ] Add ability to sort columns in the group detail table.
+* [ ] Add ability to view the current user and edit this user.
 * [ ] Add server-side input validation.
 * [ ] Improve server security.
 * [ ] Make it possible for users to click through to a page where they can follow the currency in a graph in real-time.
