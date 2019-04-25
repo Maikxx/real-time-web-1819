@@ -178,16 +178,16 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 
 ## Future enhancements
 
-* [ ] Add ability to sort columns in the group detail table.
-* [ ] Add ability to view the current user and edit this user.
-* [ ] Add server-side input validation.
-* [ ] Improve server security.
-* [ ] Make it possible for users to click through to a page where they can follow the currency in a graph in real-time.
-* [ ] Make it possible for users to select a party privacy of _closed_, so that users can invite other people to their group.
-* [ ] Make it possible to use all the crypto currencies that exist (over 4000).
-* [ ] Refactor database queries to be more concise (use nested joins).
-* [ ] Render client-side data without innerHTML.
-* [ ] When a user signs up to the platform, they are not automatically logged in.
+* [ ] Add ability to sort columns in the group detail table (**MEDIUM**).
+* [ ] Add ability to view the current user and edit this user (**MAJOR**).
+* [ ] Add server-side input validation (**MINOR**).
+* [ ] Improve server security (**MEDIUM**).
+* [ ] Make it possible for users to click through to a page where they can follow the currency in a graph in real-time (**MAJOR**).
+* [ ] Make it possible for users to select a party privacy of _closed_, so that users can invite other people to their group (**MAJOR**).
+* [ ] Make it possible to use all the crypto currencies that exist (over 4000) (**MAJOR**).
+* [ ] Refactor database queries to be more concise (use nested joins) (**REFACTOR**).
+* [ ] Render client-side data without innerHTML (**REFACTOR**).
+* [ ] When a user signs up to the platform, they are not automatically logged in (**MINOR**).
 
 ## Sources
 
