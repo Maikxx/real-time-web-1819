@@ -192,6 +192,7 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 ## Sources
 
 * CryptoBettings authentication model is heavily inspired by [this](https://github.com/timtamimi/node.js-passport.js-template) example.
+* [Crypto icon](https://www.flaticon.com/free-icon/bitcoin_749701).
 
 ## License
 

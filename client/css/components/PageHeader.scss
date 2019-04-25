@@ -7,6 +7,14 @@
 
     &__nav {
         justify-content: space-between;
+        position: relative;
+    }
+
+    &__icon {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
 
     &__logout {
