@@ -158,6 +158,8 @@ This sounds complex, which it is, so here is an example: if a user has set their
 
 If they are wrong, instead of adding a `score` and `effort`, they are subtracted.
 
+Finally, for each group there is emitted an event with the help of [Nodes EventEmitter](https://nodejs.org/api/events.html#events_class_eventemitter). This is being listened for when there is a socket connection of a group with that specific identifier, which in turn sends that groups updated `group_participants` back to the client with sockets.
+
 #### Signup
 
 1. User submitted data is validated on both the client and server.
@@ -168,6 +170,17 @@ If they are wrong, instead of adding a `score` and `effort`, they are subtracted
 
 1. User submitted data is validated on both the client and server.
 2. `bcrypt` tries to find a match between the send data and the `users` table.
+
+#### Join a group
+
+1. The dropdown with groups is being created on the server, with the `groups` data as a base. The user will see all the groups that he or she can join (meaning, he or she is not in that group yet).
+2. When a group has been added on the _create a group_ page, there is sent another event across the server, in order for this view to receive that newly created `group` via sockets (`_id` and `name` of the group).
+3. On this page a user also subscribes to a group `_id`, once a new user has been added to that group (someone else joined this group at that time), this user is being added to the user list (`_id` and `nickname`).
+4. When a user joins a group they submit the `_id` of the group, the server handles the rest by getting the users id from the session.
+
+#### List your joined groups
+
+
 
 ### Version 1
 
@@ -234,6 +247,7 @@ If they are wrong, instead of adding a `score` and `effort`, they are subtracted
 * [ ] Add ability to sort columns in the group detail table (**MEDIUM**).
 * [ ] Add ability to view the current user and edit this user (**MAJOR**).
 * [ ] Add server-side input validation (**MINOR**).
+* [ ] Improve memory management (**MAJOR**).
 * [ ] Improve server security (**MEDIUM**).
 * [ ] Make it possible for users to click through to a page where they can follow the currency in a graph in real-time (**MAJOR**).
 * [ ] Make it possible for users to select a party privacy of _closed_, so that users can invite other people to their group (**MAJOR**).
