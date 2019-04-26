@@ -178,9 +178,16 @@ Finally, for each group there is emitted an event with the help of [Nodes EventE
 3. On this page a user also subscribes to a group `_id`, once a new user has been added to that group (someone else joined this group at that time), this user is being added to the user list (`_id` and `nickname`).
 4. When a user joins a group they submit the `_id` of the group, the server handles the rest by getting the users id from the session.
 
-#### List your joined groups
+#### View your joined groups
 
+This view is rendered from the server, and requires the `groups` in which the current user is present. The data flowing here are the `_id` and `name` of the groups.
 
+#### Group detail
+
+#### Create a group
+
+1. View is rendered from the server with the top 50 `crypto_currencies` by (found with `sort_order`) as options for the groups crypto currency.
+2. The user submits this data to the server, server validates for no conflicts and creates a new entry in the `groups` table with `name` and `crypto_currency` (this last one is the `_id` of a `crypto_currency`).
 
 ### Version 1
 
