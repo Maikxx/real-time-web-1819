@@ -13,6 +13,7 @@
     2. [Authorization](#Authorization)
     3. [Endpoints](#Endpoints)
 4. [Data life cycle](#Data-life-cycle)
+    1. [Step by step](#step-by-step)
     1. [Version 1](#Version-1)
     2. [Version 2](#Version-2)
     3. [Database exploded view](#Database-exploded-view)
