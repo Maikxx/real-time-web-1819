@@ -1,9 +1,7 @@
 import EventEmitter from 'events'
 
+EventEmitter.prototype.setMaxListeners(500)
+
 export const groupCreationEmitter = new EventEmitter()
 export const groupParticipantCreationEmitter = new EventEmitter()
 export const groupScoreChanged = new EventEmitter()
-
-groupCreationEmitter.setMaxListeners(1000)
-groupParticipantCreationEmitter.setMaxListeners(1000)
-groupScoreChanged.setMaxListeners(1000)
