@@ -111,10 +111,63 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 
 ### Endpoints
 
-* [Get all crypto currencies](https://min-api.cryptocompare.com/data/all/coinlist). This endpoint gives back an object of data with the crypto currency as a key, with the data it contains in an object in that key. From this endpoint I only use the FullName, Symbol and SortOrder. I store these (transformed) in the PostgreSQL database. This connection only happens when the `process.env.RUN_SEEDERS` is set to `'true'`.
-* [Get live updates for all crypto currencies](https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=EUR). This endpoint gives back an object with crypto currencies as keys, with an object containing the valuta of choice (this application will only use euro, because I am from Europe). This connection is being polled every second (more or less) and then stored in the `crypto_currencies` table in the database. The current value is being added to the `current_value` column.
+* [Get all crypto currencies](https://min-api.cryptocompare.com/data/all/coinlist). This endpoint gives back an object of data with the crypto currency as a key, with the data it contains in an object in that key.
+
+    From this endpoint I only use the `FullName`, `Symbol` and `SortOrder`. I store these (transformed) in the PostgreSQL database. This connection only happens when the `process.env.RUN_SEEDERS` is set to `'true'`.
+
+    ![Seeding data](./docs/seeding-data.png)
+* [Get live updates for all crypto currencies](https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=EUR). This endpoint gives back an object with crypto currencies as keys, with an object containing the valuta of choice (this application will only use euro, because I am from Europe).
+
+    This connection is being polled every second (more or less) and then stored in the `crypto_currencies` table in the database. The current value is being added to the `current_value` column.
+
+    There is a maximum amount of ±50 currencies that you can request in one request.
+
+    ![Live data raw](./docs/live-data-raw.png)
 
 ## Data life cycle
+
+### Step by step
+
+Due to the complexity of this applications server, I had issues getting across the message with images (I have made them though, as you can see [here](#version-2)), so I decided to also explain everything in text.
+
+#### Setup
+
+* All the [database tables](#Database-exploded-view) are being created.
+* All the `_id` and `created_at` fields in the tables are created by PostgreSQL itself.
+* The `session` table, and interaction with it, is being handled by `express-session`.
+
+#### Seeding
+
+Connection to the CryptoCompare API to seed the `crypto_currencies` table in the database.
+From all this data (which can be seen [here](#Endpoints)) I only use `FullName`, `Symbol` and `SortOrder`.
+
+#### Continuous
+
+When the server is started up, there is a [polling](./server/src/www/poll.ts) connection setup to another CryptoCompare endpoint (also visible [here](#Endpoints)).
+
+This poll is executed each ±1 second. Since there is a lot happening (database updates and real-time publishments) it might be not strictly each second.
+
+This endpoint gives back for _each_ crypto currency requested an `object` with the key `EUR` and it's value the value of that crypto currency in euros.
+
+This data is pretty much stored in a raw format in the `crypto_currencies` table under the column `current_value`. The `current_value` of that cryptocurrency at that moment is being set as the `value_history` of that currency. These two values is what makes the detail view of a group work.
+They are used to compare wether or not a value has gone up in price or not.
+
+This then looks for all the groups in which the crypto currency is used, and updates all the `group_participants` `hypothetical_gain` and `score` in that group according to their `bet` and `effort`.
+
+This sounds complex, which it is, so here is an example: if a user has set their `bet` to `HIGH`, and the value of the crypto currency in that group goes up, they are rewarded a point added to their `score`, as well as that their `effort` (a value between 1 and 50 in euros) is being added to their `hypthetical_gain`.
+
+If they are wrong, instead of adding a `score` and `effort`, they are subtracted.
+
+#### Signup
+
+1. User submitted data is validated on both the client and server.
+2. The `email` and `username` data fields are placed in the `users` table as is, if there are no conflicts (for example duplicates).
+3. The `password` is being hashed and then stored in the `users` table.
+
+#### Login
+
+1. User submitted data is validated on both the client and server.
+2. `bcrypt` tries to find a match between the send data and the `users` table.
 
 ### Version 1
 
