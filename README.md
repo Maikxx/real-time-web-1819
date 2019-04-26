@@ -129,7 +129,7 @@ In the [dotenv](./env.example) file the key is used as follows: `CRYPTO_COMPARE_
 
 ### Step by step
 
-Due to the complexity of this applications server, I had issues getting across the message with images (I have made them though, as you can see [here](#version-2)), so I decided to also explain everything in text.
+Due to the complexity of this applications server, I had issues getting across the message with images (I have made them though, as you can see [here](#version-2)), so I decided to also explain everything in (**full detailed**, be warned, it is a lot) text.
 
 #### Setup
 
