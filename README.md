@@ -185,6 +185,12 @@ This view is rendered from the server, and requires the `groups` in which the cu
 
 #### Group detail
 
+1. The server renders a detail view of the group requested, by `_id`. This renders it with the `groups` `name` and `group_participants`. (The fields for each participant that are required here are: `_id`, `bet`, `effort`, `score` and `hypothetical_gain`, the `username` property is joined onto the `group_participants` table by `_id`).
+2. A subscription to this group is set up.
+3. When a user changes his own values in the table, these changes are validated on the server and then streamed with sockets to all other clients.
+4. When someone else changes something to their values (bet or effort) these changes are also streamed.
+5. Continuous real-time updates exist when looking at the page, giving you the updated `score` and `hypothetical_gain` for each user when they change.
+
 #### Create a group
 
 1. View is rendered from the server with the top 50 `crypto_currencies` by (found with `sort_order`) as options for the groups crypto currency.
